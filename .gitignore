@@ -1,4 +1,25 @@
-# elm-package generated files
 elm-stuff
-# elm-repl generated files
-repl-temp-*
+server
+dist/
+.vscode
+
+# dependencies
+node_modules/
+.stack-work/
+.fusebox
+
+# testing
+coverage
+
+# production
+build
+
+# misc
+.DS_Store
+.env
+npm-debug.log.*
+
+*.cabal
+
+frontend/static/app.js
+frontend/elm/Shared/Generated.elm
