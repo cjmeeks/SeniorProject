@@ -13,7 +13,7 @@ import Servant.Elm (ElmOptions (..), defElmImports, defElmOptions, generateElmFo
 import Api.Types
 import Data.Text as DT
 import Api.App.Types (Dice(..))
-import Api.Types (User(..))
+import Api.Types (UserInfo(..), Workout(..), Exercise(..), Run(..), User(..))
 
 elmOpts :: ElmOptions
 elmOpts =
@@ -32,6 +32,18 @@ specs =
          : toElmTypeSource (Proxy :: Proxy Dice)
          : toElmDecoderSource (Proxy :: Proxy Dice)
          : toElmEncoderSource (Proxy :: Proxy Dice)
+         : toElmTypeSource (Proxy :: Proxy UserInfo)
+         : toElmEncoderSource (Proxy :: Proxy UserInfo)
+         : toElmDecoderSource (Proxy :: Proxy UserInfo)
+         : toElmTypeSource (Proxy :: Proxy Workout)
+         : toElmEncoderSource (Proxy :: Proxy Workout)
+         : toElmDecoderSource (Proxy :: Proxy Workout)
+         : toElmTypeSource (Proxy :: Proxy Exercise)
+         : toElmEncoderSource (Proxy :: Proxy Exercise)
+         : toElmDecoderSource (Proxy :: Proxy Exercise)
+         : toElmTypeSource (Proxy :: Proxy Run)
+         : toElmEncoderSource (Proxy :: Proxy Run)
+         : toElmDecoderSource (Proxy :: Proxy Run)
          : toElmTypeSource (Proxy :: Proxy User)
          : toElmEncoderSource (Proxy :: Proxy User)
          : toElmDecoderSource (Proxy :: Proxy User)

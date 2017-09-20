@@ -20,6 +20,7 @@ dependencies:
 - servant
 - servant-server
 - string-conversions
+- time
 - text
 - uuid
 - wai
