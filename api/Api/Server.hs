@@ -7,7 +7,7 @@ module Api.Server
 
 import Servant ((:<|>)((:<|>)), Server, serveDirectoryFileServer)
 import Api.Types (ApiWithAssets)
-import Api.Example.Handler (rollDice)
+import Api.App.Handler (rollDice)
 
 server :: Server ApiWithAssets
 server = rollDice' :<|> serveStatic'

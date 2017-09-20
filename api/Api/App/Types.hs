@@ -1,7 +1,7 @@
 {-# LANGUAGE DeriveAnyClass #-}
 {-# LANGUAGE DeriveGeneric #-}
 
-module Api.Example.Types
+module Api.App.Types
     ( Dice (..)
     ) where
 

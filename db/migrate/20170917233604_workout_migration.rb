@@ -10,17 +10,47 @@ class WorkoutMigration < ActiveRecord::Migration[5.1]
         "height" FLOAT NOT NULL,
         "age" INT NOT NULL
       );
-      SQL
+    SQL
 
       execute <<-SQL
         CREATE TABLE workout.workouts (
-          "saved_search_id" SERIAL PRIMARY KEY,
+          "workout_id" SERIAL PRIMARY KEY,
           "date" TIMESTAMPTZ NOT NULL,
           "total_time" TIME NOT NULL,
           "workout_type" TEXT NOT NULL,
           "user_id" INTEGER NOT NULL references workout.users(user_id)
         );
       SQL
+      
+      execute <<-SQL
+        CREATE TABLE workout.lifts (
+          "lift_id" SERIAL PRIMARY KEY,
+          "lift_name" VARCHAR NOT NULL
+        );
+      SQL
+
+      execute <<-SQL
+        CREATE TABLE workout.exercise (
+          "exercise_id" SERIAL PRIMARY KEY,
+          "reps" INT NOT NULL,
+          "sets" INT NOT NULL,
+          "time" TIME NOT NULL,
+          "lift_id" INT NOT NULL references workout.lifts(lift_id)
+        );
+      SQL
+
+      execute <<-SQL
+        CREATE TABLE workout.run (
+          "run_id" SERIAL PRIMARY KEY,
+          "terrain" VARCHAR,
+          "date" TIMESTAMPTZ NOT NULL,
+          "distance" FLOAT NOT NULL,
+          "mile_avg" FLOAT NOT NULL,
+          "speed_avg" FLOAT NOT NULL,
+          "workout_id" INT NOT NULL references workout.workouts(workout_id)
+        );
+      SQL
+
 
   end
 

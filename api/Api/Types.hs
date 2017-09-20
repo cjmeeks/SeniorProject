@@ -8,10 +8,15 @@
 module Api.Types
     ( Api
     , ApiWithAssets
+    , User
     ) where
 
 import Servant ((:<|>), (:>), Post, JSON, ReqBody, Raw)
-import Api.Example.Types (Dice)
+import Api.App.Types (Dice)
+import Elm (ElmType(..))
+import Data.Aeson (FromJSON, ToJSON)
+import GHC.Generics (Generic)
+import Data.Text (Text)
 
 type Api
         = "api"
@@ -19,4 +24,14 @@ type Api
                            :> Post '[JSON] Int
                )
 
-type ApiWithAssets = "servant-elm-template" :> (Api :<|> Raw)
+type ApiWithAssets = (Api :<|> Raw)
+
+data User = User 
+        { user_id :: Int
+        , user_first_name :: Text
+        , user_last_name :: Text
+        , user_username :: Text
+        , user_weight :: Float
+        , user_height :: Float
+        , user_age ::Int
+        } deriving (Show, Generic, ElmType, ToJSON, FromJSON)
