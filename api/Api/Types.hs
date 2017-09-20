@@ -4,6 +4,7 @@
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
 module Api.Types
     ( Api
@@ -13,18 +14,19 @@ module Api.Types
     , Exercise
     , Run
     , User
+    , Lift
     , ElmUTCTime(..)
     ) where
 
 import Servant ((:<|>), (:>), Post, JSON, ReqBody, Raw)
 import Api.App.Types (Dice)
+import Api.Elm (ElmUTCTime(..))
 import Elm (ElmType(..))
 import Data.Aeson (FromJSON, ToJSON)
 import GHC.Generics (Generic)
 import Data.Text (Text)
 import Data.Time (Day, UTCTime)
 import Data.UUID (UUID, toText)
-import Elm (ElmType(..))
 import GHC.Generics (Generic)
 
 type Api
@@ -35,13 +37,6 @@ type Api
 
 type ApiWithAssets = (Api :<|> Raw)
 
-
-newtype ElmUTCTime = ElmUTCTime
-    { getUTCTime :: UTCTime
-    } deriving (Show, ToJSON, FromJSON)
-
-instance ElmType ElmUTCTime where
-    toElmType = \(ElmUTCTime time) -> toElmType (show time)
 
 data UserInfo = UserInfo
     { user_id :: Int
@@ -56,7 +51,7 @@ data UserInfo = UserInfo
 data User = User
     { userInfo :: UserInfo
     , workouts :: [Workout]
-    }
+    } deriving (Show, Generic, ElmType, ToJSON, FromJSON)
 
 data Workout = Workout
     { workout_id :: Int

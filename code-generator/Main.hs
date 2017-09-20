@@ -13,12 +13,12 @@ import Servant.Elm (ElmOptions (..), defElmImports, defElmOptions, generateElmFo
 import Api.Types
 import Data.Text as DT
 import Api.App.Types (Dice(..))
-import Api.Types (UserInfo(..), Workout(..), Exercise(..), Run(..), User(..))
+import Api.Types (UserInfo, Workout, Exercise, Run, User, Lift)
 
 elmOpts :: ElmOptions
 elmOpts =
   defElmOptions
-    { urlPrefix = Static "/servant-elm-template" }
+    { urlPrefix = Static "/" }
 
 elmImports :: [Text]
 elmImports = [ "import Dict exposing (Dict)"
@@ -47,6 +47,9 @@ specs =
          : toElmTypeSource (Proxy :: Proxy User)
          : toElmEncoderSource (Proxy :: Proxy User)
          : toElmDecoderSource (Proxy :: Proxy User)
+         : toElmTypeSource (Proxy :: Proxy Lift)
+         : toElmEncoderSource (Proxy :: Proxy Lift)
+         : toElmDecoderSource (Proxy :: Proxy Lift)
          : generateElmForAPIWith elmOpts  (Proxy :: Proxy Api)
          )
   ]
