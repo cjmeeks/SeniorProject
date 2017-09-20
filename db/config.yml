@@ -1,16 +1,16 @@
 development:
   adapter: postgresql
-  database: example
+  database: senior_project
   encoding: utf8
   host: localhost
   port: 5432
-  username: postgres
-  password: postgres
+  username: cjmeeks
+  password: cjmeeksdb
 production:
   adapter: postgresql
-  database: example
+  database: senior_project
   encoding: utf8
   host: localhost
   port: 5432
-  username: postgres
-  password: postgres
+  username: cjmeeks
+  password: cjmeeksdb
