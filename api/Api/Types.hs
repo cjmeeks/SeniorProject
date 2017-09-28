@@ -15,6 +15,7 @@ module Api.Types
     , Run
     , User
     , Lift
+    , Set
     , ElmUTCTime(..)
     ) where
 
