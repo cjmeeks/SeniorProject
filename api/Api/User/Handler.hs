@@ -1,13 +1,18 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Api.App.Handler
-    ( rollDice
+module Api.User.Handler
+    ( userHandler
     ) where
 
 import Servant (Handler)        
 import Control.Monad.IO.Class (liftIO)
 import System.Random (getStdRandom, randomR)
-import Api.Types (User(..), )
+import Api.Types (User(..))
+import Api.Config (defaultConfig, DbConfig(..))
 
-rollDice :: Dice -> Handler Int
-rollDice dice = liftIO $ getStdRandom (randomR (1,(numSides dice)))
+userHandler :: String -> Handler Int
+userHandler dice = undefined
+    
+getUser ::  DbConfig -> Int -> User
+getUser config userid =
+    undefined
