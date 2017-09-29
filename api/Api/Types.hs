@@ -9,17 +9,16 @@
 module Api.Types
     ( Api
     , ApiWithAssets
-    , UserInfo
-    , Workout
-    , Exercise
-    , Run
-    , User
-    , Lift
-    , Set
+    , Workout(..)
+    , Exercise(..)
+    , Run(..)
+    , User(..)
+    , Lift(..)
+    , Set(..)
     , ElmUTCTime(..)
     ) where
 
-import Servant ((:<|>), (:>), Post, JSON, ReqBody, Raw)
+import Servant ((:<|>), (:>), Post, JSON, ReqBody, Raw, QueryParam, Get)
 import Api.App.Types (Dice)
 import Api.Elm (ElmUTCTime(..))
 import Elm (ElmType(..))
@@ -33,24 +32,25 @@ import Database.PostgreSQL.Simple.FromRow (FromRow, field, fromRow)
 
 type Api
         = "api"
-            :> ("rollDice" :> ReqBody '[JSON] Dice
-                           :> Post '[JSON] Int
+            :> ("user" :> QueryParam "userid" Int
+                           :> Get '[JSON] User
                )
 
 type ApiWithAssets = (Api :<|> Raw)
 
 
-data UserInfo = UserInfo
+data User = User
     { user_id :: Int
     , user_first_name :: Text
     , user_last_name :: Text
     , user_username :: Text
-    , user_weight :: Float
-    , user_height :: Float
+    , user_weight :: Int
+    , user_height :: Int
     , user_age ::Int
+    , user_workouts :: [Workout]
     } deriving (Show, Generic, ElmType, ToJSON, FromJSON)
 
-instance FromRow UserInfo where
+instance FromRow User where
     fromRow = do
         user_id' <- field 
         user_first_name' <- field 
@@ -59,13 +59,9 @@ instance FromRow UserInfo where
         user_weight' <- field 
         user_height' <- field 
         user_age' <- field
-        return $ UserInfo user_id' user_first_name' user_last_name' user_username' user_weight' user_height' user_age' 
+        return $ User user_id' user_first_name' user_last_name' user_username' user_weight' user_height' user_age' []
 
 
-data User = User
-    { userInfo :: UserInfo
-    , workouts :: [Workout]
-    } deriving (Show, Generic, ElmType, ToJSON, FromJSON)
 
 data Workout = Workout
     { workout_id :: Int

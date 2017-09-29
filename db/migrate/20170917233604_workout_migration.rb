@@ -6,8 +6,8 @@ class WorkoutMigration < ActiveRecord::Migration[5.1]
         "first_name" TEXT NOT NULL,
         "last_name" TEXT NOT NULL,
         "username" TEXT NOT NULL,
-        "weight" FLOAT NOT NULL,
-        "height" FLOAT NOT NULL,
+        "weight" INT NOT NULL,
+        "height" INT NOT NULL,
         "age" INT NOT NULL
       );
     SQL

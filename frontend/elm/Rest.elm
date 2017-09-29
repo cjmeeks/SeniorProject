@@ -1,18 +1,18 @@
 module Rest exposing (..)
 
-import Shared.Generated exposing (Dice, postApiRollDice)
+import Shared.Generated exposing (getApiUser, User)
 import Http
 import Types exposing (Msg(..))
 
-rollDice : Dice -> Cmd Msg
-rollDice dice =
-    Http.send processResult <| postApiRollDice dice
+rollDice : Int -> Cmd Msg
+rollDice userId =
+    Http.send processResult <| getApiUser (Just 2)
 
-processResult : Result Http.Error Int -> Msg
+processResult : Result Http.Error User -> Msg
 processResult result =
     case result of
-        Ok num ->
-            NewFace num
+        Ok _ ->
+            NewFace 3
         
         Err err ->
             DiceRollFailure err

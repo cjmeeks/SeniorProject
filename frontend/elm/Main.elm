@@ -1,8 +1,7 @@
 import Html exposing (..)
 import Html.Events exposing (..)
 import Random
-import Shared.Generated exposing (Dice)
-import Types exposing (Msg(..), Model, initialModel, initialDice)
+import Types exposing (Msg(..), Model, initialModel)
 import Rest exposing (rollDice)
 
 main : Program Never Model Msg
@@ -24,10 +23,10 @@ update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
     Roll ->
-      (model, rollDice initialDice)
+      (model, rollDice 2)
 
     NewFace newFace ->
-      (Model model.dice newFace, Cmd.none)
+      (Model newFace, Cmd.none)
     
     DiceRollFailure err ->
       (model, Cmd.none)

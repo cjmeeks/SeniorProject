@@ -12,8 +12,7 @@ import Elm (Spec (Spec), specsToDir, toElmTypeSource, toElmDecoderSource, toElmE
 import Servant.Elm (ElmOptions (..), defElmImports, defElmOptions, generateElmForAPIWith, UrlPrefix (Static))
 import Api.Types
 import Data.Text as DT
-import Api.App.Types (Dice(..))
-import Api.Types (UserInfo, Workout, Exercise, Run, User, Lift, Set)
+import Api.Types (Workout, Exercise, Run, User, Lift, Set)
 
 elmOpts :: ElmOptions
 elmOpts =
@@ -29,12 +28,6 @@ specs =
   [ 
     Spec ["Shared", "Generated"]
          ( defElmImports `append` (DT.intercalate "\n" elmImports)
-         : toElmTypeSource (Proxy :: Proxy Dice)
-         : toElmDecoderSource (Proxy :: Proxy Dice)
-         : toElmEncoderSource (Proxy :: Proxy Dice)
-         : toElmTypeSource (Proxy :: Proxy UserInfo)
-         : toElmEncoderSource (Proxy :: Proxy UserInfo)
-         : toElmDecoderSource (Proxy :: Proxy UserInfo)
          : toElmTypeSource (Proxy :: Proxy Workout)
          : toElmEncoderSource (Proxy :: Proxy Workout)
          : toElmDecoderSource (Proxy :: Proxy Workout)

@@ -7,10 +7,10 @@ module Api.Server
 
 import Servant ((:<|>)((:<|>)), Server, serveDirectoryFileServer)
 import Api.Types (ApiWithAssets)
-import Api.App.Handler (rollDice)
+import Api.User.Handler (userHandler)
 
 server :: Server ApiWithAssets
-server = rollDice' :<|> serveStatic'
+server = userHandler' :<|> serveStatic'
     where
-        rollDice' = rollDice
+        userHandler' = userHandler
         serveStatic' = serveDirectoryFileServer "./frontend/dist/static"

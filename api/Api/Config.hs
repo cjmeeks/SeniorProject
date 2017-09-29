@@ -7,7 +7,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
 module Api.Config
-    ( DbConfig
+    ( DbConfig(..)
     , defaultConfig
     ) where
 
@@ -21,7 +21,7 @@ import GHC.Generics (Generic)
 import Database.PostgreSQL.Simple (ConnectInfo(..))
 
 data DbConfig = DbConfig
-        { connectInfo :: ConnectInfo
+        { postConfig :: ConnectInfo
         } deriving (Show)
 
 defaultConfig = DbConfig (ConnectInfo  "localhost" 5432 "cjmeeks" "cjmeeksdb" "senior_project")
