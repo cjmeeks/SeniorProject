@@ -16,7 +16,7 @@ class WorkoutMigration < ActiveRecord::Migration[5.1]
         CREATE TABLE workout.workouts (
           "workout_id" SERIAL PRIMARY KEY,
           "date" TIMESTAMPTZ NOT NULL,
-          "total_time" BIGINT NOT NULL,
+          "total_time" DOUBLE PRECISION NOT NULL,
           "workout_type" TEXT NOT NULL,
           "user_id" INTEGER NOT NULL references workout.users(user_id)
         );
