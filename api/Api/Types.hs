@@ -110,10 +110,10 @@ instance FromRow Set where
 
 data Run = Run
     { run_id :: Int
-    , run_distance :: Float
+    , run_distance :: Double
     , run_time :: Double
-    , run_mile_avg :: Float
-    , run_speed_avg :: Float
+    , run_mile_avg :: Double
+    , run_speed_avg :: Double
     , run_workout_id :: Int
     } deriving (Show, Generic, ElmType, ToJSON, FromJSON)
 

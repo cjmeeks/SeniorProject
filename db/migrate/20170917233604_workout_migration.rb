@@ -32,7 +32,7 @@ class WorkoutMigration < ActiveRecord::Migration[5.1]
       execute <<-SQL
         CREATE TABLE workout.exercise (
           "exercise_id" SERIAL PRIMARY KEY,
-          "time" BIGINT NOT NULL,
+          "time" DOUBLE PRECISION NOT NULL,
           "workout_id" INT NOT NULL references workout.workouts(workout_id)
         );
       SQL
@@ -40,8 +40,8 @@ class WorkoutMigration < ActiveRecord::Migration[5.1]
       execute <<-SQL
         CREATE TABLE workout.run (
           "run_id" SERIAL PRIMARY KEY,
-          "date" TIMESTAMPTZ NOT NULL,
           "distance" FLOAT NOT NULL,
+          "time" DOUBLE PRECISION NOT NULL, 
           "mile_avg" FLOAT NOT NULL,
           "speed_avg" FLOAT NOT NULL,
           "workout_id" INT NOT NULL references workout.workouts(workout_id)

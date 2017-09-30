@@ -26,7 +26,8 @@ userHandler userid = do
     newUser <- fromMaybe (throwError err500) user
     workouts <- liftIO $ getWorkouts conn (user_id newUser)
     newWorkouts <- mapM (getRuns conn) workouts
-    finalUser <- return $ newUser { user_workouts = newWorkouts }
+    exercises <- mapM (getExercises conn) newWorkouts
+    finalUser <- return $ newUser { user_workouts = exercises }
     _ <- liftIO $ close conn
     return finalUser
 
@@ -46,6 +47,12 @@ getRuns conn wk = do
     runs <- liftIO $ query conn queryRuns [workout_id wk]
     return $ wk { workout_runs = runs }
 
+getExercises :: Connection -> Workout -> Handler Workout
+getExercises conn wk = do
+    runs <- liftIO $ query conn queryExercises [workout_id wk]
+    return $ wk { workout_runs = runs }
+
+
 queryUser :: Query
 queryUser =
     [sql|
@@ -62,4 +69,10 @@ queryRuns :: Query
 queryRuns =
     [sql|
         SELECT * FROM workout.run WHERE workout_id = ?
+    |]
+
+queryExercises :: Query
+queryExercises =
+    [sql|
+        SELECT * FROM workout.exercise WHERE workout_id = ?
     |]
