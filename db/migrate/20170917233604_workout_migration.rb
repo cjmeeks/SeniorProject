@@ -5,7 +5,7 @@ class WorkoutMigration < ActiveRecord::Migration[5.1]
         "user_id" SERIAL PRIMARY KEY,
         "first_name" TEXT NOT NULL,
         "last_name" TEXT NOT NULL,
-        "username" TEXT NOT NULL,
+        "username" TEXT NOT NULL UNIQUE,
         "weight" INT NOT NULL,
         "height" INT NOT NULL,
         "age" INT NOT NULL

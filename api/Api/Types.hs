@@ -89,6 +89,13 @@ data Exercise = Exercise
     , exercise_sets :: [Set]
     } deriving (Show, Generic, ElmType, ToJSON, FromJSON)
 
+instance FromRow Exercise where
+    fromRow = do
+        exercise_id' <- field 
+        exercise_time' <- field 
+        exercise_workout_id' <- field 
+        return $ Exercise exercise_id' exercise_time' exercise_workout_id' []
+
 data Set = Set
     { set_id :: Int
     , set_weight :: Int
