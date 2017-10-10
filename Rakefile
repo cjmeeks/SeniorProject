@@ -31,3 +31,10 @@ end
 task :serve do
     sh("stack exec app")
 end
+
+task :rebuild_db do
+    sh("rake db:environment:set RAILS_ENV=development")
+    sh("rake db:drop RAILS_ENV=development")
+    sh("rake db:create RAILS_ENV=development")
+    sh("rake db:migrate RAILS_ENV=development")
+end

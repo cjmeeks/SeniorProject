@@ -84,7 +84,7 @@ instance FromRow Workout where
 
 data Exercise = Exercise
     { exercise_id :: Int
-    , exercise_time :: Double
+    , exercise_time :: Int
     , exercise_workout_id :: Int
     , exercise_sets :: [Set]
     } deriving (Show, Generic, ElmType, ToJSON, FromJSON)
