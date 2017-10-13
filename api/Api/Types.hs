@@ -19,7 +19,6 @@ module Api.Types
     ) where
 
 import Servant ((:<|>), (:>), Post, JSON, ReqBody, Raw, QueryParam, Get)
-import Api.App.Types (Dice)
 import Api.Elm (ElmUTCTime(..))
 import Elm (ElmType(..))
 import Data.Aeson (FromJSON, ToJSON)
@@ -32,8 +31,13 @@ import Database.PostgreSQL.Simple.FromRow (FromRow, field, fromRow)
 
 type Api
         = "api"
-            :> ("user" :> QueryParam "userid" Int
-                           :> Get '[JSON] User
+            :> ("user"  :> QueryParam "userid" Int
+                        :> Get '[JSON] User
+                :<|> "add" :> "workout" :> QueryParam "date" Text
+                                        :> QueryParam "total_time" Double
+                                        :> QueryParam "workout_type" Text
+                                        :> QueryParam "user_id" Int
+                                        :> Post '[JSON] Text
                )
 
 type ApiWithAssets = (Api :<|> Raw)

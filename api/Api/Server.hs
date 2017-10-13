@@ -8,9 +8,11 @@ module Api.Server
 import Servant ((:<|>)((:<|>)), Server, serveDirectoryFileServer)
 import Api.Types (ApiWithAssets)
 import Api.User.Handler (userHandler)
+import Api.Workout.Handler (addWorkout)
 
 server :: Server ApiWithAssets
-server = userHandler' :<|> serveStatic'
+server = (userHandler' :<|> addWorkout') :<|> serveStatic'
     where
         userHandler' = userHandler
         serveStatic' = serveDirectoryFileServer "./frontend/dist/static"
+        addWorkout' = addWorkout
