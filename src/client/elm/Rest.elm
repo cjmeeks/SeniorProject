@@ -11,8 +11,8 @@ rollDice userId =
 processResult : Result Http.Error User -> Msg
 processResult result =
     case result of
-        Ok _ ->
-            NewFace 3
+        Ok us ->
+            HandleUser us
         
         Err err ->
-            DiceRollFailure err
+            HandleError err

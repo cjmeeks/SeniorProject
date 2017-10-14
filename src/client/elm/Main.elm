@@ -3,6 +3,8 @@ import Html.Events exposing (..)
 import Random
 import Types exposing (Msg(..), Model, initialModel)
 import Rest exposing (rollDice)
+import Nav.View as NavView
+import Bootstrap.Navbar as Nav
 
 main : Program Never Model Msg
 main =
@@ -16,30 +18,31 @@ main =
 
 init : (Model, Cmd Msg)
 init =
-  (initialModel, Cmd.none)
+  initialModel
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
-    Roll ->
-      (model, rollDice 2)
-
-    NewFace newFace ->
-      (Model newFace, Cmd.none)
+    NavMsg state ->
+      ( { model | navbar = state }, Cmd.none )
     
-    DiceRollFailure err ->
-      (model, Cmd.none)
+    HandleUser us ->
+      ( { model | user = us }, Cmd.none )
+
+    HandleError err ->
+      ( model, Cmd.none )
+    
 
 -- SUBSCRIPTIONS
 subscriptions : Model -> Sub Msg
 subscriptions model =
-  Sub.none
+    Nav.subscriptions model.navbar NavMsg
+  
 
 -- VIEW
 view : Model -> Html Msg
 view model =
   div []
-    [ h1 [] [ text (toString model.dieFace) ]
-    , button [ onClick Roll ] [ text "Roll" ]
+    [ NavView.view model
     ]

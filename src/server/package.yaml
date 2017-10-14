@@ -6,8 +6,6 @@ maintainer: Tyler Lentz
 copyright: Tyler Lentz
 license: AllRightsReserved
 github: tlentz/servent-elm-template
-extra-source-files:
-- README.md
 
 dependencies:
 - aeson
@@ -20,8 +18,8 @@ dependencies:
 - servant
 - servant-server
 - string-conversions
-- time
 - text
+- time
 - uuid
 - wai
 
@@ -31,6 +29,8 @@ library:
   - Api.Types
   - Api.Helper
   - Api.Server
+  - Api.Example.Types
+  - Api.Example.Handler
   dependencies:
   - containers
   - data-default

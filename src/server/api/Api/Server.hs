@@ -17,7 +17,7 @@ server :: Server ApiWithAssets
 server = (userHandler' :<|> (addWorkout' :<|> addExercise' :<|> addRun' :<|> addSet') :<|> (deleteWk' :<|> deleteExercise' :<|> deleteRun' :<|> deleteSet')) :<|> serveStatic'
     where
         userHandler' = userHandler
-        serveStatic' = serveDirectoryFileServer "./frontend/dist/static"
+        serveStatic' = serveDirectoryFileServer "../client/dist"
         addWorkout' = addWorkout
         addExercise' = addExercise
         addRun' = addRun
