@@ -5,7 +5,7 @@ class WorkoutMigration < ActiveRecord::Migration[5.1]
         "user_id" SERIAL PRIMARY KEY,
         "first_name" TEXT NOT NULL,
         "last_name" TEXT NOT NULL,
-        "username" TEXT NOT NULL,
+        "username" TEXT NOT NULL UNIQUE,
         "weight" INT NOT NULL,
         "height" INT NOT NULL,
         "age" INT NOT NULL
@@ -16,9 +16,9 @@ class WorkoutMigration < ActiveRecord::Migration[5.1]
         CREATE TABLE workout.workouts (
           "workout_id" SERIAL PRIMARY KEY,
           "date" TIMESTAMPTZ NOT NULL,
-          "total_time" BIGINT NOT NULL,
+          "total_time" DOUBLE PRECISION NOT NULL,
           "workout_type" TEXT NOT NULL,
-          "user_id" INTEGER NOT NULL references workout.users(user_id)
+          "user_id" INT NOT NULL references workout.users(user_id)
         );
       SQL
       
@@ -32,7 +32,7 @@ class WorkoutMigration < ActiveRecord::Migration[5.1]
       execute <<-SQL
         CREATE TABLE workout.exercise (
           "exercise_id" SERIAL PRIMARY KEY,
-          "time" BIGINT NOT NULL,
+          "time" INT NOT NULL,
           "workout_id" INT NOT NULL references workout.workouts(workout_id)
         );
       SQL
@@ -40,8 +40,8 @@ class WorkoutMigration < ActiveRecord::Migration[5.1]
       execute <<-SQL
         CREATE TABLE workout.run (
           "run_id" SERIAL PRIMARY KEY,
-          "date" TIMESTAMPTZ NOT NULL,
           "distance" FLOAT NOT NULL,
+          "time" DOUBLE PRECISION NOT NULL, 
           "mile_avg" FLOAT NOT NULL,
           "speed_avg" FLOAT NOT NULL,
           "workout_id" INT NOT NULL references workout.workouts(workout_id)

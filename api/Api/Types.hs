@@ -19,7 +19,6 @@ module Api.Types
     ) where
 
 import Servant ((:<|>), (:>), Post, JSON, ReqBody, Raw, QueryParam, Get)
-import Api.App.Types (Dice)
 import Api.Elm (ElmUTCTime(..))
 import Elm (ElmType(..))
 import Data.Aeson (FromJSON, ToJSON)
@@ -32,9 +31,42 @@ import Database.PostgreSQL.Simple.FromRow (FromRow, field, fromRow)
 
 type Api
         = "api"
-            :> ("user" :> QueryParam "userid" Int
-                           :> Get '[JSON] User
-               )
+            :> ("user"  :> QueryParam "userid" Int
+                        :> Get '[JSON] User)
+            :<|> "add" :> ("workout" :> QueryParam "date" Text
+                                        :> QueryParam "total_time" Double
+                                        :> QueryParam "workout_type" Text
+                                        :> QueryParam "user_id" Int
+                                        :> Post '[JSON] Text
+                            :<|> "exercise" :> QueryParam "time" Int
+                                            :> QueryParam "workout_id" Int
+                                            :> Post '[JSON] Text
+                            :<|> "run" :> QueryParam "distance" Float
+                                        :> QueryParam "time" Double
+                                        :> QueryParam "mile_avg" Float
+                                        :> QueryParam "speed_avg" Float
+                                        :> QueryParam "workout_id" Int
+                                        :> Post '[JSON] Text
+                            :<|> "set" :> QueryParam "weight" Int
+                                        :> QueryParam "reps" Int
+                                        :> QueryParam "exercise_id" Int
+                                        :> QueryParam "lift_id" Int
+                                        :> Post '[JSON] Text
+                            )
+            :<|> "delete" :> ( "workout" :> QueryParam "workout_id" Int
+                                            :> QueryParam "user_id" Int
+                                            :> Post '[JSON] Text
+                            :<|> "exercise" :> QueryParam "exercise_id" Int
+                                            :> QueryParam "user_id" Int
+                                            :> Post '[JSON] Text
+                            :<|> "run" :> QueryParam "run_id" Int
+                                            :> QueryParam "user_id" Int
+                                            :> Post '[JSON] Text
+                            :<|> "set" :> QueryParam "set_id" Int
+                                            :> QueryParam "user_id" Int
+                                            :> Post '[JSON] Text
+
+                            )
 
 type ApiWithAssets = (Api :<|> Raw)
 
@@ -84,10 +116,17 @@ instance FromRow Workout where
 
 data Exercise = Exercise
     { exercise_id :: Int
-    , exercise_time :: Double
+    , exercise_time :: Int
     , exercise_workout_id :: Int
     , exercise_sets :: [Set]
     } deriving (Show, Generic, ElmType, ToJSON, FromJSON)
+
+instance FromRow Exercise where
+    fromRow = do
+        exercise_id' <- field 
+        exercise_time' <- field 
+        exercise_workout_id' <- field 
+        return $ Exercise exercise_id' exercise_time' exercise_workout_id' []
 
 data Set = Set
     { set_id :: Int
@@ -110,10 +149,10 @@ instance FromRow Set where
 
 data Run = Run
     { run_id :: Int
-    , run_distance :: Float
+    , run_distance :: Double
     , run_time :: Double
-    , run_mile_avg :: Float
-    , run_speed_avg :: Float
+    , run_mile_avg :: Double
+    , run_speed_avg :: Double
     , run_workout_id :: Int
     } deriving (Show, Generic, ElmType, ToJSON, FromJSON)
 

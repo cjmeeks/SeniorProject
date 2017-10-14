@@ -31,8 +31,6 @@ library:
   - Api.Types
   - Api.Helper
   - Api.Server
-  - Api.App.Types
-  - Api.App.Handler
   dependencies:
   - containers
   - data-default
