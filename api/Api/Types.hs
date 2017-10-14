@@ -32,13 +32,41 @@ import Database.PostgreSQL.Simple.FromRow (FromRow, field, fromRow)
 type Api
         = "api"
             :> ("user"  :> QueryParam "userid" Int
-                        :> Get '[JSON] User
-                :<|> "add" :> "workout" :> QueryParam "date" Text
+                        :> Get '[JSON] User)
+            :<|> "add" :> ("workout" :> QueryParam "date" Text
                                         :> QueryParam "total_time" Double
                                         :> QueryParam "workout_type" Text
                                         :> QueryParam "user_id" Int
                                         :> Post '[JSON] Text
-               )
+                            :<|> "exercise" :> QueryParam "time" Int
+                                            :> QueryParam "workout_id" Int
+                                            :> Post '[JSON] Text
+                            :<|> "run" :> QueryParam "distance" Float
+                                        :> QueryParam "time" Double
+                                        :> QueryParam "mile_avg" Float
+                                        :> QueryParam "speed_avg" Float
+                                        :> QueryParam "workout_id" Int
+                                        :> Post '[JSON] Text
+                            :<|> "set" :> QueryParam "weight" Int
+                                        :> QueryParam "reps" Int
+                                        :> QueryParam "exercise_id" Int
+                                        :> QueryParam "lift_id" Int
+                                        :> Post '[JSON] Text
+                            )
+            :<|> "delete" :> ( "workout" :> QueryParam "workout_id" Int
+                                            :> QueryParam "user_id" Int
+                                            :> Post '[JSON] Text
+                            :<|> "exercise" :> QueryParam "exercise_id" Int
+                                            :> QueryParam "user_id" Int
+                                            :> Post '[JSON] Text
+                            :<|> "run" :> QueryParam "run_id" Int
+                                            :> QueryParam "user_id" Int
+                                            :> Post '[JSON] Text
+                            :<|> "set" :> QueryParam "set_id" Int
+                                            :> QueryParam "user_id" Int
+                                            :> Post '[JSON] Text
+
+                            )
 
 type ApiWithAssets = (Api :<|> Raw)
 
