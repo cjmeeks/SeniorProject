@@ -71,7 +71,6 @@ nav {
     margin: 0;
     position: fixed;
     z-index: 100;
-    box-shadow: 0px 1px 0px $purple;
 }
 
 nav ul {
@@ -125,54 +124,4 @@ nav ul li {
 
 .run {
     padding: 2px;
-}
-
-.full-width {
-    width: 100%;
-    min-width: 100%;
-    margin: 0;
-}
-
-.half-screen-button {
-    width: 100%;
-}
-
-.add-set{
-    float: right;
-    background-color: $stark;
-    color: $void;
-    font-size: 10px;
-}
-.add-set-label{
-    float: right;
-    padding-right: 5px;
-    padding-top: 5px;
-}
-
-.icon-btn {
-    width: 20px;
-    height:20px;
-    margin: auto;
-}
-
-.add-ex-btn{
-    background-color: $neon-purple;
-    color: $stark;
-}
-.add-ex-btn:hover{
-    opacity: .75;
-    cursor: pointer;
-}
-
-.add-cardio-btn{
-    background-color: $neon-purple;
-    color: $stark;
-}
-.add-cardio-btn:hover{
-    opacity: .75;
-    cursor: pointer;
-}
-
-.icon-with-text i{
-    margin-right: 5px;
 }

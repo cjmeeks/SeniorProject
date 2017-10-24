@@ -35,13 +35,3 @@ end
 task :elm do
   sh("cd client && elm package install --yes")
 end
-
-task :installers do
-  sh("stack setup")
-  sh("stack install hpack")
-  sh("stack install intero")
-  sh("npm install -g typescript")
-  sh("npm install")
-  sh("gem install pg")
-  sh("gem install standalone_migrations")
-end
