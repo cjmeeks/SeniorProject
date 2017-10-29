@@ -5,6 +5,7 @@ import Shared.Generated exposing (User)
 import Navigation exposing (Location)
 import Routing exposing (parseLocation)
 import Types exposing (Msg(..), Model)
+import Ports.Ports exposing (buildDatePicker, DatePickerMsg)
 
 
 initUser : User
@@ -27,5 +28,6 @@ initialModel loc =
         ({ navbar = navbar
          , user = initUser
          , currentPage = parseLocation loc 
+         , queryDate = ""
          }
-        , navCmd)
+        , Cmd.batch [buildDatePicker (DatePickerMsg "test" "1-1-2000 TO 1-23-2001"),navCmd])

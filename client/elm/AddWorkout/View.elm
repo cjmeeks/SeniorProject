@@ -1,11 +1,12 @@
 module AddWorkout.View exposing (..)
 
+import Bootstrap.Button as Button
+import Bootstrap.Card as Card
+import FontAwesome.Web as Icon
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Bootstrap.Card as Card
-import Bootstrap.Button as Button
+import Shared.Helper exposing (datePicker)
 import Types exposing (Model, Msg(..))
-import FontAwesome.Web as Icon
 
 
 view : Model -> Html Msg

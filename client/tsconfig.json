@@ -1,17 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES5",
-    "module": "commonjs",
+    "target": "es6",
     "sourceMap": true,
-    "moduleResolution": "node",
-    "preserveConstEnums": true,
-    "removeComments": true,
-    "strict": true
+    "typeRoots": [
+      "../node_modules/@types"
+    ]
   },
-  "compileOnSave": false,
-  "exclude": [
-    "node_modules",
-    ".vscode",
-    "dist/"
-  ]
+  "moduleResolution": "node"
 }

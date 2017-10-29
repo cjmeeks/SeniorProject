@@ -13,6 +13,7 @@ import Bootstrap.Navbar as Nav
 import Navigation exposing (Location)
 import Routing exposing (parseLocation)
 import Init exposing (initialModel, initUser)
+import Ports.Ports exposing (handleDateChange)
 
 
 main : Program Never Model Msg
@@ -36,6 +37,8 @@ update msg model =
 
         HandleError err ->
             ( model, Cmd.none )
+        HandleDateChange date ->
+            ({model | queryDate = date}, Cmd.none)
 
         LocationChange loc ->
             ( { model | currentPage = parseLocation loc }, Cmd.none )
@@ -47,7 +50,10 @@ update msg model =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Nav.subscriptions model.navbar NavMsg
+    Sub.batch
+    [ Nav.subscriptions model.navbar NavMsg
+    , handleDateChange HandleDateChange
+    ]
 
 
 

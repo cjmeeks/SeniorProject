@@ -9,6 +9,7 @@ type Msg
   | HandleUser User
   | HandleError Http.Error
   | LocationChange Location
+  | HandleDateChange String
 
 type Page 
     = Dashboard
@@ -21,6 +22,7 @@ type alias Model =
     { navbar : Nav.State
     , user : User
     , currentPage : Page
+    , queryDate : String
     }
 
 
