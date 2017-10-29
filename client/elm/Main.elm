@@ -1,25 +1,27 @@
 module Main exposing (..)
 
-import Html exposing (..)
-import Html.Events exposing (..)
-import Html.Attributes exposing (..)
-import Random
-import Types exposing (Msg(..), Page(..), Model)
-import Rest exposing (rollDice)
-import Nav.View as NavView
 import AddWorkout.View as Add
-import Dashboard.View as Dash
 import Bootstrap.Navbar as Nav
+import Dashboard.View as Dash
+import Dict
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
+import Init exposing (initUser, initialModel)
+import Nav.View as NavView
 import Navigation exposing (Location)
+import Ports.Ports exposing (DatePickerMsg, buildDatePicker, handleDateChange)
+import Random
+import Rest exposing (rollDice)
 import Routing exposing (parseLocation)
-import Init exposing (initialModel, initUser)
-import Ports.Ports exposing (handleDateChange)
+import Types exposing (Model, Msg(..), Page(..))
+import Workout.View as Workout
 
 
 main : Program Never Model Msg
 main =
     Navigation.program LocationChange
-        { init = initialModel
+        { init = init
         , view = view
         , update = update
         , subscriptions = subscriptions
@@ -37,11 +39,21 @@ update msg model =
 
         HandleError err ->
             ( model, Cmd.none )
+
         HandleDateChange date ->
-            ({model | queryDate = date}, Cmd.none)
+            ( { model | queryDate = date }, Cmd.none )
 
         LocationChange loc ->
             ( { model | currentPage = parseLocation loc }, Cmd.none )
+
+
+init : Location -> ( Model, Cmd Msg )
+init loc =
+    let
+        initModel =
+            initialModel loc
+    in
+    ( initModel, Cmd.batch <| List.map buildDatePicker <| List.map (\( _, y ) -> DatePickerMsg y "1-1-2000 TO 1-23-2001") <| Dict.toList initModel.dateNames )
 
 
 
@@ -51,9 +63,9 @@ update msg model =
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.batch
-    [ Nav.subscriptions model.navbar NavMsg
-    , handleDateChange HandleDateChange
-    ]
+        [ Nav.subscriptions model.navbar NavMsg
+        , handleDateChange HandleDateChange
+        ]
 
 
 
@@ -72,7 +84,7 @@ view model =
                     div [ class "main-row" ] [ Add.view model ]
 
                 Workouts ->
-                    div [ class "main-view" ] [ text "workouts" ]
+                    div [ class "main-row" ] [ Workout.view model ]
 
                 Stats ->
                     div [ class "main-view" ] [ text "stats" ]
@@ -80,7 +92,7 @@ view model =
                 Profile ->
                     div [ class "main-view" ] [ text "profile" ]
     in
-        div []
-            [ NavView.newView model
-            , curView
-            ]
+    div []
+        [ NavView.newView model
+        , curView
+        ]

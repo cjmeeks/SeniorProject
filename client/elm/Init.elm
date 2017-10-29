@@ -1,11 +1,13 @@
 module Init exposing (..)
-import Http
+
 import Bootstrap.Navbar as Nav
-import Shared.Generated exposing (User)
+import Dict
+import Http
 import Navigation exposing (Location)
+import Ports.Ports exposing (DatePickerMsg, buildDatePicker)
 import Routing exposing (parseLocation)
-import Types exposing (Msg(..), Model)
-import Ports.Ports exposing (buildDatePicker, DatePickerMsg)
+import Shared.Generated exposing (User)
+import Types exposing (Model, Msg(..))
 
 
 initUser : User
@@ -20,14 +22,16 @@ initUser =
     , user_workouts = []
     }
 
-initialModel : Location -> (Model, Cmd Msg)
+
+initialModel : Location -> Model
 initialModel loc =
     let
-        (navbar, navCmd) = Nav.initialState NavMsg
+        ( navbar, navCmd ) =
+            Nav.initialState NavMsg
     in
-        ({ navbar = navbar
-         , user = initUser
-         , currentPage = parseLocation loc 
-         , queryDate = ""
-         }
-        , Cmd.batch [buildDatePicker (DatePickerMsg "test" "1-1-2000 TO 1-23-2001"),navCmd])
+    { navbar = navbar
+    , user = initUser
+    , currentPage = parseLocation loc
+    , queryDate = ""
+    , dateNames = Dict.fromList <| [ ( "workoutDateRange", "wk-date-range" ) ]
+    }

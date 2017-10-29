@@ -38,8 +38,10 @@ app.ports.buildDatePicker.subscribe(function(input) {
   if(dates.startDate.toString() == "Invalid Date") {
     datePicker(name, moment().subtract(29, 'days'), moment());
   } else {
-    datePicker(name, moment(dates.startDate), moment(dates.endDate));
+    // datePicker(name, moment(dates.startDate), moment(dates.endDate));
+    datePicker(name, moment().subtract(29, 'days'), moment());
   }
+  app.ports.handleDateChange.send("["+moment().subtract(29, 'days').format('YYYY-MM-DD') + " TO " + moment().format('YYYY-MM-DD')+"]");
 });
 
 function parseDateRangeInput(input) {
