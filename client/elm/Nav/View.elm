@@ -1,9 +1,9 @@
 module Nav.View exposing (..)
 
+import FontAwesome.Web as Icon
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Types exposing (Model, Msg(..), Page(..))
-import FontAwesome.Web as Icon
 
 
 newView : Model -> Html Msg
@@ -39,12 +39,12 @@ newView model =
             else
                 "not-active-nav nav-item"
     in
-        nav []
-            [ ul []
-                [ li [ class <| dashClass ++ " icon-with-text" ] [ a [ href "#dashboard" ] [ Icon.dashboard, text "Dashboard" ] ]
-                , li [ class <| addClass ++ " icon-with-text" ] [ a [ href "#addworkout" ] [ Icon.plus, text "Add Workout" ] ]
-                , li [ class <| workClass ++ " icon-with-text" ] [ a [ href "#workouts" ] [ Icon.bars, text "Workouts" ] ]
-                , li [ class <| statClass ++ " icon-with-text" ] [ a [ href "#stats" ] [ Icon.bar_chart, text "Stats" ] ]
-                , li [ class <| profClass ++ " icon-with-text" ] [ a [ href "#profile" ] [ Icon.user, text "Profile" ] ]
-                ]
+    nav [ class "my-nav-bar" ]
+        [ div [ class <| profClass ++ " icon-with-text profile-nav" ] [ a [ href "#profile" ] [ Icon.user, text model.user.user_username ] ]
+        , ul []
+            [ li [ class <| dashClass ++ " icon-with-text" ] [ a [ href "#dashboard" ] [ Icon.dashboard, text "Dashboard" ] ]
+            , li [ class <| addClass ++ " icon-with-text" ] [ a [ href "#addworkout" ] [ Icon.plus, text "Add Workout" ] ]
+            , li [ class <| workClass ++ " icon-with-text" ] [ a [ href "#workouts" ] [ Icon.bars, text "Workouts" ] ]
+            , li [ class <| statClass ++ " icon-with-text" ] [ a [ href "#stats" ] [ Icon.bar_chart, text "Stats" ] ]
             ]
+        ]

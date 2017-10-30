@@ -13,9 +13,9 @@ import Types exposing (Model, Msg(..))
 initUser : User
 initUser =
     { user_id = 0
-    , user_first_name = "String"
-    , user_last_name = "String"
-    , user_username = "String"
+    , user_first_name = "FirstName"
+    , user_last_name = "LastName"
+    , user_username = "UserName"
     , user_weight = 0
     , user_height = 0
     , user_age = 0

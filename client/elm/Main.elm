@@ -15,6 +15,7 @@ import Random
 import Rest exposing (rollDice)
 import Routing exposing (parseLocation)
 import Types exposing (Model, Msg(..), Page(..))
+import User.View as User
 import Workout.View as Workout
 
 
@@ -87,10 +88,10 @@ view model =
                     div [ class "main-row" ] [ Workout.view model ]
 
                 Stats ->
-                    div [ class "main-view" ] [ text "stats" ]
+                    div [ class "main-row" ] [ text "stats" ]
 
                 Profile ->
-                    div [ class "main-view" ] [ text "profile" ]
+                    div [ class "main-row" ] [ User.view model ]
     in
     div []
         [ NavView.newView model
