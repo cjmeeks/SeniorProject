@@ -8,6 +8,7 @@ import Ports.Ports exposing (DatePickerMsg, buildDatePicker)
 import Routing exposing (parseLocation)
 import Shared.Generated exposing (User)
 import Types exposing (Model, Msg(..))
+import Stats.Types exposing(initStats)
 
 
 initUser : User
@@ -34,4 +35,5 @@ initialModel loc =
     , currentPage = parseLocation loc
     , queryDate = ""
     , dateNames = Dict.fromList <| [ ( "workoutDateRange", "wk-date-range" ) ]
+    , statsModel = initStats
     }

@@ -14,9 +14,11 @@ import Ports.Ports exposing (DatePickerMsg, buildDatePicker, handleDateChange)
 import Random
 import Rest exposing (rollDice)
 import Routing exposing (parseLocation)
+import Stats.View as Stats
 import Types exposing (Model, Msg(..), Page(..))
 import User.View as User
 import Workout.View as Workout
+import Stats.Update
 
 
 main : Program Never Model Msg
@@ -46,7 +48,12 @@ update msg model =
 
         LocationChange loc ->
             ( { model | currentPage = parseLocation loc }, Cmd.none )
-
+        StatsUpdate msg ->
+            let
+                (updatedModel, cmd) = 
+                    Stats.Update.update msg model
+            in
+                (updatedModel, Cmd.map StatsUpdate cmd )
 
 init : Location -> ( Model, Cmd Msg )
 init loc =
@@ -88,7 +95,7 @@ view model =
                     div [ class "main-row" ] [ Workout.view model ]
 
                 Stats ->
-                    div [ class "main-row" ] [ text "stats" ]
+                    div [ class "main-row" ] [ Html.map StatsUpdate <| Stats.view model ]
 
                 Profile ->
                     div [ class "main-row" ] [ User.view model ]

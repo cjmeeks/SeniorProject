@@ -5,6 +5,7 @@ import Dict
 import Http
 import Navigation exposing (Location)
 import Shared.Generated exposing (User)
+import Stats.Types exposing (StatsModel, StatsMsg(..))
 
 
 type Msg
@@ -13,6 +14,7 @@ type Msg
     | HandleError Http.Error
     | LocationChange Location
     | HandleDateChange String
+    | StatsUpdate StatsMsg
 
 
 type Page
@@ -29,4 +31,9 @@ type alias Model =
     , currentPage : Page
     , queryDate : String
     , dateNames : Dict.Dict String String
+    , statsModel : StatsModel
     }
+
+
+type Date
+    = Date String
