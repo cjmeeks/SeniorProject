@@ -12,13 +12,13 @@ import Nav.View as NavView
 import Navigation exposing (Location)
 import Ports.Ports exposing (DatePickerMsg, buildDatePicker, handleDateChange)
 import Random
-import Rest exposing (rollDice)
+import Rest exposing (getUser)
 import Routing exposing (parseLocation)
+import Stats.Update
 import Stats.View as Stats
 import Types exposing (Model, Msg(..), Page(..))
 import User.View as User
 import Workout.View as Workout
-import Stats.Update
 
 
 main : Program Never Model Msg
@@ -41,6 +41,10 @@ update msg model =
             ( { model | user = us }, Cmd.none )
 
         HandleError err ->
+            let
+                temp =
+                    Debug.log "Error: " err
+            in
             ( model, Cmd.none )
 
         HandleDateChange date ->
@@ -48,12 +52,14 @@ update msg model =
 
         LocationChange loc ->
             ( { model | currentPage = parseLocation loc }, Cmd.none )
+
         StatsUpdate msg ->
             let
-                (updatedModel, cmd) = 
+                ( updatedModel, cmd ) =
                     Stats.Update.update msg model
             in
-                (updatedModel, Cmd.map StatsUpdate cmd )
+            ( updatedModel, Cmd.map StatsUpdate cmd )
+
 
 init : Location -> ( Model, Cmd Msg )
 init loc =
@@ -61,7 +67,7 @@ init loc =
         initModel =
             initialModel loc
     in
-    ( initModel, Cmd.batch <| List.map buildDatePicker <| List.map (\( _, y ) -> DatePickerMsg y "1-1-2000 TO 1-23-2001") <| Dict.toList initModel.dateNames )
+    ( initModel, Cmd.batch <| List.append (List.map buildDatePicker <| List.map (\( _, y ) -> DatePickerMsg y "1-1-2000 TO 1-23-2001") <| Dict.toList initModel.dateNames) [ getUser 1 ] )
 
 
 

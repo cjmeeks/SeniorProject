@@ -17,7 +17,7 @@ import Api.Types (Workout, Exercise, Run, User, Lift, Set)
 elmOpts :: ElmOptions
 elmOpts =
   defElmOptions
-    { urlPrefix = Static "/" }
+    { urlPrefix = Static "" }
 
 elmImports :: [Text]
 elmImports = [ "import Dict exposing (Dict)"

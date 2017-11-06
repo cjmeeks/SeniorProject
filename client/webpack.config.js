@@ -142,7 +142,7 @@ module.exports = {
           chunks: false,
         },
         proxy: {
-          '/servant-elm-template/*': {
+          '/api/*': {
             target: 'http://localhost:3000',
             changeOrigin: true,
           },

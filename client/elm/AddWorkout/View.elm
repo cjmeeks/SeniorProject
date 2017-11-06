@@ -44,7 +44,7 @@ view model =
 
 exerciseView : Html Msg
 exerciseView =
-    Card.config [ Card.attrs [ class "run-card" ], Card.outlineInfo ]
+    Card.config [ Card.attrs [ class "run-card" ] ]
         |> Card.headerH1 []
             [ div [ class "ex-header" ]
                 [ text "My Exercise Info"
@@ -60,7 +60,7 @@ exerciseView =
 
 setView : Html Msg
 setView =
-    Card.config [ Card.attrs [ class "run-card" ], Card.outlineInfo ]
+    Card.config [ Card.attrs [ class "run-card" ] ]
         |> Card.block []
             [ Card.text [] [ set ]
             ]
