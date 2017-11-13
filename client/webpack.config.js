@@ -116,7 +116,7 @@ module.exports = {
             mobile: true,
             lang: 'en-US',
 
-            title: 'Servant Elm Template',
+            title: 'Workout Stat Tracker',
             links: [],
             xhtml: true,
             hash: false,
