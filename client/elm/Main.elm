@@ -19,6 +19,7 @@ import Stats.View as Stats
 import Types exposing (Model, Msg(..), Page(..))
 import User.View as User
 import Workout.View as Workout
+import Printable.View as Print
 
 
 main : Program Never Model Msg
@@ -45,7 +46,7 @@ update msg model =
                 temp =
                     Debug.log "Error: " err
             in
-            ( model, Cmd.none )
+                ( model, Cmd.none )
 
         HandleDateChange date ->
             ( { model | queryDate = date }, Cmd.none )
@@ -58,7 +59,7 @@ update msg model =
                 ( updatedModel, cmd ) =
                     Stats.Update.update msg model
             in
-            ( updatedModel, Cmd.map StatsUpdate cmd )
+                ( updatedModel, Cmd.map StatsUpdate cmd )
 
 
 init : Location -> ( Model, Cmd Msg )
@@ -67,7 +68,7 @@ init loc =
         initModel =
             initialModel loc
     in
-    ( initModel, Cmd.batch <| List.append (List.map buildDatePicker <| List.map (\( _, y ) -> DatePickerMsg y "1-1-2000 TO 1-23-2001") <| Dict.toList initModel.dateNames) [ getUser 1 ] )
+        ( initModel, Cmd.batch <| List.append (List.map buildDatePicker <| List.map (\( _, y ) -> DatePickerMsg y "1-1-2000 TO 1-23-2001") <| Dict.toList initModel.dateNames) [ getUser 1 ] )
 
 
 
@@ -105,8 +106,11 @@ view model =
 
                 Profile ->
                     div [ class "main-row" ] [ User.view model ]
+
+                Print ->
+                    div [ class "print" [ Print.view model.currentWorkout ] ]
     in
-    div []
-        [ NavView.newView model
-        , curView
-        ]
+        div []
+            [ NavView.newView model
+            , curView
+            ]

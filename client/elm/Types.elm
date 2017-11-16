@@ -4,7 +4,7 @@ import Bootstrap.Navbar as Nav
 import Dict
 import Http
 import Navigation exposing (Location)
-import Shared.Generated exposing (User)
+import Shared.Generated exposing (User, Workout)
 import Stats.Types exposing (StatsModel, StatsMsg(..))
 
 
@@ -23,6 +23,7 @@ type Page
     | Workouts
     | Stats
     | Profile
+    | Print
 
 
 type alias Model =
@@ -32,6 +33,7 @@ type alias Model =
     , queryDate : String
     , dateNames : Dict.Dict String String
     , statsModel : StatsModel
+    , currentWorkout : Workout
     }
 
 
