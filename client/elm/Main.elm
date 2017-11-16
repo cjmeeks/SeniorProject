@@ -59,6 +59,12 @@ update msg model =
                     Stats.Update.update msg model
             in
             ( updatedModel, Cmd.map StatsUpdate cmd )
+        
+        AddExercise ->
+            (model, Cmd.none)
+
+        AddRun ->
+            (model, Cmd.none)
 
 
 init : Location -> ( Model, Cmd Msg )
