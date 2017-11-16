@@ -15,6 +15,8 @@ type Msg
     | LocationChange Location
     | HandleDateChange String
     | StatsUpdate StatsMsg
+    | AddExercise
+    | AddRun
 
 
 type Page
@@ -33,7 +35,7 @@ type alias Model =
     , queryDate : String
     , dateNames : Dict.Dict String String
     , statsModel : StatsModel
-    , currentWorkout : Workout
+    , stagedWorkout : Workout
     }
 
 
