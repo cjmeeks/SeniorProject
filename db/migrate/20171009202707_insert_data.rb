@@ -5,21 +5,42 @@ class InsertData < ActiveRecord::Migration[5.1]
   def change
 
     
-    cj = ["cj", "meeks", "cjmeeks", 175, 160, 21]
-    test = ["test", "test", "test", 175, 160, 21]
+    cj = ["cj", "meeks", "cjmeeks","password", 175, 160, 21]
     
 
     
-    lift1 = ["lift1"]
-    lift2 = ["lift2"]
-    lift3 = ["lift3"]
-    lift4 = ["lift4"]
+    lift1 = ["Squat"]
+    lift2 = ["Leg Press"]
+    lift3 = ["Lunge"]
+    lift4 = ["DeadLift"]
+    lift5 = ["Leg Extension"]
+    lift6 = ["Leg Curl"]
+    lift7 = ["Standing calf raise"]
+    lift8 = ["Hip Adductor"]
+    lift9 = ["Bench Press"]
+    lift10 = ["Chest Fly"]
+    lift11 = ["Push up"]
+    lift12 = ["Pull-Down"]
+    lift13= ["Pull-Up"]
+    lift14 = ["Bent-Over Row"]
+    lift15 = ["Upgright Row"]
+    lift16 = ["Shoulder Press"]
+    lift17 = ["Shoulder Fly"]
+    lift18 = ["Lateral Raise"]
+    lift19 = ["Shoulder Shrug"]
+    lift20 = ["Push-down"]
+    lift21 = ["Triceps extension"]
+    lift22 = ["Biceps Curl"]
+    lift23 = ["Crunch"]
+    lift24 = ["Russian Twist"]
+    lift25 = ["Leg raise"]
+    lift26 = ["Back extensions"]
     
 
-    w1 = [ Time.now, 3000, "run", 1]
-    w2 = [ Time.now, 3000, "run", 1]
-    w3 = [ Time.now, 3000, "run", 1]
-    w4 = [ Time.now, 3000, "run", 1]
+    w1 = [ Time.now, 3000, "run", 0]
+    w2 = [ Time.now, 3000, "run", 0]
+    w3 = [ Time.now, 3000, "run", 0]
+    w4 = [ Time.now, 3000, "run", 0]
     
 
     run1 = [6, 3000, 8, 6, 1]
@@ -36,18 +57,40 @@ class InsertData < ActiveRecord::Migration[5.1]
     s6 = [34, 12, 1,1]
 
     userQuery = []
-    userQuery << "insert into workout.users (first_name, last_name, username, weight, height, age) values"
-    userQuery << "('#{cj[0]}','#{cj[1]}','#{cj[2]}',#{cj[3]},#{cj[4]},#{cj[5]})"
+    userQuery << "insert into workout.users (first_name, last_name, username, password, weight, height, age) values"
+    userQuery << "('#{cj[0]}','#{cj[1]}','#{cj[2]}','#{cj[3]}',#{cj[4]},#{cj[5]},#{cj[6]})"
 
     liftQuery = []
     liftQuery << "insert into workout.lifts (lift_name) values"
     liftQuery << "('#{lift1[0]}'), "
     liftQuery << "('#{lift2[0]}'), "
     liftQuery << "('#{lift3[0]}'), "
-    liftQuery << "('#{lift4[0]}')"
+    liftQuery << "('#{lift4[0]}'), "
+    liftQuery << "('#{lift5[0]}'), "
+    liftQuery << "('#{lift6[0]}'), "
+    liftQuery << "('#{lift7[0]}'), "
+    liftQuery << "('#{lift8[0]}'), "
+    liftQuery << "('#{lift9[0]}'), "
+    liftQuery << "('#{lift10[0]}'), "
+    liftQuery << "('#{lift11[0]}'), "
+    liftQuery << "('#{lift12[0]}'), "
+    liftQuery << "('#{lift13[0]}'), "
+    liftQuery << "('#{lift14[0]}'), "
+    liftQuery << "('#{lift15[0]}'), "
+    liftQuery << "('#{lift16[0]}'), "
+    liftQuery << "('#{lift17[0]}'), "
+    liftQuery << "('#{lift18[0]}'), "
+    liftQuery << "('#{lift19[0]}'), "
+    liftQuery << "('#{lift20[0]}'), "
+    liftQuery << "('#{lift21[0]}'), "
+    liftQuery << "('#{lift22[0]}'), "
+    liftQuery << "('#{lift23[0]}'), "
+    liftQuery << "('#{lift24[0]}'), "
+    liftQuery << "('#{lift25[0]}'), "
+    liftQuery << "('#{lift26[0]}')"
 
     workoutQuery = []
-    workoutQuery << "insert into workout.workouts (date, total_time, workout_type, user_id) values "
+    workoutQuery << "insert into workout.workouts (date, total_time, workout_name, user_id) values "
     workoutQuery << "('#{w1[0]}',#{w1[1]},'#{w1[2]}',#{w1[3]}), "
     workoutQuery << "('#{w2[0]}',#{w2[1]},'#{w2[2]}',#{w2[3]}), "
     workoutQuery << "('#{w3[0]}',#{w3[1]},'#{w3[2]}',#{w3[3]}), "
@@ -74,10 +117,10 @@ class InsertData < ActiveRecord::Migration[5.1]
 
     execute userQuery.join(" ")
     execute liftQuery.join(" ")
-    execute workoutQuery.join(" ")
-    execute runQuery.join(" ")
-    execute exerciseQuery.join(" ")
-    execute setQuery.join(" ")
+    # execute workoutQuery.join(" ")
+    # execute runQuery.join(" ")
+    # execute exerciseQuery.join(" ")
+    # execute setQuery.join(" ")
 
   end
 end

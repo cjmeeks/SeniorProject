@@ -18,5 +18,5 @@ app = serve apiWithAssets server
 
 main :: IO ()
 main = do
-  let port = 3000
+  let port = 4000
   run port app

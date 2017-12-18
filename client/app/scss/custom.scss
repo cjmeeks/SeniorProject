@@ -13,6 +13,7 @@ $void: #0e0b16;
 $purple: #a239ca;
 $neon-purple: #4717f6;
 $stark: #e7dfdd;
+$gray: rgb(230, 230, 230);
 
 $navbar-height: 40px;
 
@@ -95,7 +96,7 @@ nav {
 
 .profile-nav {
     display: table;
-    width: 10%;
+    width: 25%;
 }
 
 
@@ -136,8 +137,48 @@ nav ul li {
 }
 .main-row .card {
 }
+.fav-wk-button {
+    float: right;
+    cursor: pointer;
+}
+
+.login-wrapper{
+    left: 35vw;
+    top: 25vh;
+    position: fixed;
+    width: 500px;
+    background-color: $neon-purple;
+    color: white;
+    padding: 10px;
+    font-size: 26px;
+}
+.profile-stats{
+    padding: 15px;
+}
+
+.login-input-row, .login-input, .login-label{
+    margin: 0;
+    padding: 0;
+}
+
+.login-input-button{
+    cursor: pointer;
+}
+
+.my-workouts {
+    font-size: 47px;
+    text-align: center;
+}
 .main-graph .card{
     height: 100%;
+    background-color: $gray;
+}
+
+.graph-block{
+    background-color: $gray;
+}
+.tab a{
+    background-color: $void;
 }
 .container {
     margin: 0;
@@ -245,4 +286,54 @@ nav ul li {
     padding-top: 0px;
     padding-bottom: 5px;
     padding-right: 10px;
+}
+
+
+.save-workout-button {
+    position: fixed;
+    top: 95vh;
+}
+
+.save-workout {
+    cursor: pointer;
+}
+
+.saved-icon {
+    top: 10px;
+}
+
+.add-workout-wrapper {
+    
+}
+.add-workout-circle-button {
+    background-color: #4CAF50;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    top: 91vh;
+    left: 94vw;
+    position: fixed;
+    height: 75px;
+    width:75px;
+    cursor: pointer;
+}
+
+.view-workout-click {
+    cursor: pointer;
+}
+
+.delete-card-button {
+    float: right;
+    cursor: pointer;
+}
+
+.fav-header {
+    font-size: 48px;
+    text-align: center;
 }

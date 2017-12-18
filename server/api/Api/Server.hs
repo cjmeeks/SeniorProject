@@ -7,22 +7,29 @@ module Api.Server
 
 import Servant ((:<|>)((:<|>)), Server, serveDirectoryFileServer)
 import Api.Types (ApiWithAssets)
-import Api.User.Handler (userHandler)
-import Api.Workout.Handler (addWorkout, deleteWk)
-import Api.Exercise.Handler (addExercise, deleteExercise)
-import Api.Run.Handler (addRun, deleteRun)
-import Api.Set.Handler (addSet, deleteSet)
+import Api.User.Handler (userHandler, loginHandler, singupHandler)
+import Api.Workout.Handler (addWorkout, deleteWk, getCurrentWorkoutId, addSavedWorkout, deleteSavedWorkout)
+import Api.Exercise.Handler (getExerciseId, deleteExercise)
+import Api.Run.Handler (getRunId, deleteRun)
+import Api.Set.Handler (getSetId, deleteSet)
+import Api.Lift (getLifts)
 
 server :: Server ApiWithAssets
-server = (userHandler' :<|> (addWorkout' :<|> addExercise' :<|> addRun' :<|> addSet') :<|> (deleteWk' :<|> deleteExercise' :<|> deleteRun' :<|> deleteSet')) :<|> serveStatic'
+server = ((userHandler':<|> loginHandler' :<|> singupHandler' :<|> liftHandler' :<|> (addWorkout' :<|> getExerciseId' :<|> getRunId' :<|> getSetId' :<|> getWorkoutId' :<|> addSavedWorkout') :<|> (deleteWk' :<|> deleteExercise' :<|> deleteRun' :<|> deleteSet' :<|> deleteSavedWorkout'))) :<|> serveStatic'
     where
         userHandler' = userHandler
+        liftHandler' = getLifts
         serveStatic' = serveDirectoryFileServer "../client/dist"
         addWorkout' = addWorkout
-        addExercise' = addExercise
-        addRun' = addRun
-        addSet' = addSet
+        getWorkoutId' = getCurrentWorkoutId
+        getExerciseId' = getExerciseId
+        getRunId' = getRunId
+        getSetId' = getSetId
         deleteWk' = deleteWk
         deleteExercise' = deleteExercise
         deleteRun' = deleteRun
         deleteSet' = deleteSet
+        addSavedWorkout' = addSavedWorkout
+        deleteSavedWorkout' =deleteSavedWorkout
+        loginHandler' = loginHandler
+        singupHandler' = singupHandler

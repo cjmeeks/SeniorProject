@@ -25,7 +25,7 @@ var datePicker = function(inputName, sDate, eDate){
              'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
           }
       }, function(start, end, label) {
-          app.ports.handleDateChange.send("["+moment(start).format('YYYY-MM-DD') + " TO " + moment(end).format('YYYY-MM-DD')+"]");
+          app.ports.handleDateChange.send("["+moment(start).format('YYYY-MM-DD HH:mm') + " TO " + moment(end).format('YYYY-MM-DD HH:mm')+"]");
       });
   }, 300);
 };
@@ -41,7 +41,7 @@ app.ports.buildDatePicker.subscribe(function(input) {
     // datePicker(name, moment(dates.startDate), moment(dates.endDate));
     datePicker(name, moment().subtract(29, 'days'), moment());
   }
-  app.ports.handleDateChange.send("["+moment().subtract(29, 'days').format('YYYY-MM-DD') + " TO " + moment().format('YYYY-MM-DD')+"]");
+  app.ports.handleDateChange.send("["+moment().subtract(29, 'days').format('YYYY-MM-DD HH:mm') + " TO " + moment().format('YYYY-MM-DD HH:mm')+"]");
 });
 
 function parseDateRangeInput(input) {
@@ -57,3 +57,7 @@ function parseDateRangeInput(input) {
   }
   return {startDate : start , endDate : end}
 };
+
+app.ports.getCurrentDate.subscribe(function(){
+  app.ports.handleDateChange.send(moment().format('YYYY-MM-DD HH:mm'));
+});

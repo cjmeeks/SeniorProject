@@ -5,6 +5,7 @@
 module Api.Run.Handler
     ( addRun
     , deleteRun
+    , getRunId
     ) where
 
 import Servant (Handler, err500, errBody, err400)        
@@ -14,7 +15,7 @@ import Data.Maybe (Maybe(..), fromMaybe)
 import Data.List (length)
 import Data.Time (UTCTime)
 import System.Random (getStdRandom, randomR)
-import Database.PostgreSQL.Simple (Connection, Query, close, connect, execute, query)
+import Database.PostgreSQL.Simple (Connection, Query, close, connect, execute, query, query_)
 import Database.PostgreSQL.Simple.SqlQQ
 import Api.Types (ElmUTCTime, User(..), Workout(..), Run(..), Set(..), Exercise(..), Lift(..))
 import Api.Config (defaultConfig, DbConfig(..))
@@ -22,19 +23,34 @@ import System.IO.Unsafe (unsafePerformIO)
 import Data.String.Conversions (cs)
 import Data.Text (Text)
 
-addRun :: Maybe Float -> Maybe Double -> Maybe Float -> Maybe Float -> Maybe Int -> Handler Text
-addRun dis time mileAvg speedAvg wkid = do
-    dis' <- maybe (throwError $ err400 {errBody = "no distance"}) (return) dis
-    time' <- maybe (throwError $ err400 {errBody = "no time"}) (return) time
-    mileAvg' <- maybe (throwError $ err400 {errBody = "no mile avg"}) (return) mileAvg
-    speedAvg' <- maybe (throwError $ err400 {errBody = "no speed"}) (return) speedAvg
-    wkid' <- maybe (throwError $ err400 {errBody = "no workout id"}) (return) wkid
+getRunId ::  Handler Int
+getRunId = do
     conn <- liftIO $ connect (postConfig defaultConfig)
-    numRows <- liftIO $ execute conn addRQuery (dis', time', mileAvg', speedAvg', wkid')
+    runs <- liftIO $ (query_ conn rQuery :: IO [Run])
+    _ <- liftIO $ close conn
+    case length runs of
+        0 -> return 1
+        _ -> return $ (run_id (runs !! 0) + 1)
+
+rQuery :: Query
+rQuery =
+    [sql|
+        SELECT * FROM workout.run ORDER BY run_id DESC LIMIT 1
+    |]
+
+addRun :: Int -> Run -> Handler Int
+addRun wid run = do
+    let distance = (run_distance run)
+        thisNM' = run_workout_id run :: Int
+        time = (run_time run)
+        mile_avg = (run_mile_avg run)
+        speed_avg = (run_speed_avg run)
+    conn <- liftIO $ connect (postConfig defaultConfig)
+    numRows <- liftIO $ execute conn addRQuery (distance, time, mile_avg, speed_avg, wid)
     _ <- liftIO $ close conn
     case numRows of
-        0 -> throwError $ err400 {errBody = "(run add) No run added."}
-        _ -> return "Success"
+        0 -> throwError $ err400 {errBody = "(workout add) No workout added"}
+        _ -> return 1
 
 addRQuery :: Query
 addRQuery =
