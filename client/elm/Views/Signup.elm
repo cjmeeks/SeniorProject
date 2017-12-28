@@ -1,19 +1,19 @@
-module Signup exposing (..)
+module Views.Signup exposing (..)
 
-import Bootstrap.Form.InputGroup as InputGroup
-import Bootstrap.Form.Input as Input
 import Bootstrap.Button as Button
-import Bootstrap.Modal as Modal
 import Bootstrap.Card as Card
 import Bootstrap.Dropdown as Drop
+import Bootstrap.Form.Input as Input
+import Bootstrap.Form.InputGroup as InputGroup
+import Bootstrap.Modal as Modal
 import FontAwesome.Web as Icon
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
-import Shared.Helper exposing (datePicker, displayMileAvg)
-import Types exposing (Model, Msg(..), Cardio(..), SetFormMsg(..), Data(..))
-import Shared.Generated exposing (Exercise, Workout, Set, User, Run)
 import Round exposing (..)
+import Shared.Generated exposing (Exercise, Run, Set, User, Workout)
+import Shared.Helper exposing (datePicker, displayMileAvg)
+import Types exposing (Cardio(..), Data(..), Model, Msg(..), SetFormMsg(..))
 
 
 signupModal : Model -> Html Msg

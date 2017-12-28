@@ -1,4 +1,4 @@
-module Login exposing (..)
+module Views.Login exposing (..)
 
 import Bootstrap.Button as Button
 import Bootstrap.Card as Card
@@ -10,7 +10,7 @@ import Html.Events exposing (..)
 import Shared.Generated exposing (Workout)
 import Shared.Helper exposing (datePicker)
 import Types exposing (Model, Msg(..))
-import Signup
+import Views.Signup as Signup
 
 
 view : Model -> Html Msg
