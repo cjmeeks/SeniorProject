@@ -35,6 +35,18 @@ import Types exposing (Cardio(..), Data(..), Model, Msg(..), Page(..), SetFormMs
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        UpdateLogin ya ->
+            ( model, Cmd.none )
+
+        UpdateSignup ya ->
+            ( model, Cmd.none )
+
+        UpdateModals ya ->
+            ( model, Cmd.none )
+
+        UpdateHandle ya ->
+            ( model, Cmd.none )
+
         HandleSuccess str ->
             ( model, getUser model.user.user_id )
 
