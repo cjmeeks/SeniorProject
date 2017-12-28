@@ -66,3 +66,24 @@ detailedWorkoutView wk =
             ]
         , div [ class "col-12" ] (List.map (exerciseView False) <| List.indexedMap (,) wk.workout_exercises)
         ]
+
+printExerciseView :( Int, Exercise ) -> Html Msg
+printExerciseView ( index, ex ) =
+    div [ class "col-12 run" ]
+        [ div [ class "ex-header" ]
+                    [ text <| "Exercise" ++ toString (index + 1)
+                    ]
+                ]
+        , div [] <| List.map setView (List.indexedMap (,) ex.exercise_sets)
+                , if bool then
+                    Card.custom <|
+                        div [ class "row" ]
+                            [ span [ class "col-4" ] []
+                            , Button.button [ Button.onClick (OpenSet ex.exercise_id), Button.attrs [ class "col-4" ] ]
+                                [ Icon.plus ]
+                            ]
+                  else
+                    Card.custom <| span [] []
+                ]
+            |> Card.view
+        ]
