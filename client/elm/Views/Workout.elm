@@ -6,10 +6,10 @@ import FontAwesome.Web as Icon
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Shared.Generated exposing (Workout)
+import Shared.Generated exposing (Exercise, Lift, Set, Workout)
 import Shared.Helper exposing (datePicker)
 import Types exposing (Model, Msg(..))
-import Views.AddWorkout exposing (exerciseView, runView)
+import Views.AddWorkout exposing (exerciseView, runView, setView)
 
 
 view : Model -> Html Msg
@@ -67,23 +67,12 @@ detailedWorkoutView wk =
         , div [ class "col-12" ] (List.map (exerciseView False) <| List.indexedMap (,) wk.workout_exercises)
         ]
 
-printExerciseView :( Int, Exercise ) -> Html Msg
+
+printExerciseView : ( Int, Exercise ) -> Html Msg
 printExerciseView ( index, ex ) =
     div [ class "col-12 run" ]
         [ div [ class "ex-header" ]
-                    [ text <| "Exercise" ++ toString (index + 1)
-                    ]
-                ]
+            [ text <| "Exercise" ++ toString (index + 1)
+            ]
         , div [] <| List.map setView (List.indexedMap (,) ex.exercise_sets)
-                , if bool then
-                    Card.custom <|
-                        div [ class "row" ]
-                            [ span [ class "col-4" ] []
-                            , Button.button [ Button.onClick (OpenSet ex.exercise_id), Button.attrs [ class "col-4" ] ]
-                                [ Icon.plus ]
-                            ]
-                  else
-                    Card.custom <| span [] []
-                ]
-            |> Card.view
         ]
