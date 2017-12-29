@@ -30,16 +30,18 @@ import Rest
 import Routing exposing (parseLocation)
 import Shared.Helper exposing (getGraphDataRunDistance, getGraphDataRunMile, getGraphDataRunSpeed, getRunStats, getTotalTimeWorkout)
 import Types exposing (Cardio(..), Data(..), Model, Msg(..), Page(..), SetFormMsg(..))
+import Update.Login as ULogin
+import Update.Signup as USignup
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         UpdateLogin ya ->
-            ( model, Cmd.none )
+            ULogin.login ya model
 
         UpdateSignup ya ->
-            ( model, Cmd.none )
+            USignup.signup ya model
 
         UpdateModals ya ->
             ( model, Cmd.none )

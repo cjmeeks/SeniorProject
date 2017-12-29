@@ -1,4 +1,4 @@
-module Update.Update exposing (..)
+module Update.Login exposing (..)
 
 import Bootstrap.Modal as Modal
 import Dict
