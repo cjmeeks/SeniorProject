@@ -49,3 +49,7 @@ task :installers do
   sh("gem install pg")
   sh("gem install standalone_migrations")
 end
+
+task :install => :build do
+  sh("cd server && stack install --local-bin-path bin")
+end
