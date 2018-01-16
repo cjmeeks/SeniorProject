@@ -6,6 +6,7 @@ task :watch => [:build_backend, :elm_api_code_generator, :serve_webpack_hot_relo
 task :build => [:build_backend, :elm_api_code_generator, :build_frontend]
 
 task :serve_app => [:build, :serve]
+task :build_prod => [:build, :install]
 
 multitask :serve_webpack_hot_reload => [:serve, :webpack_hot_reload]
 

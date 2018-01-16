@@ -9,7 +9,8 @@ coverage
 
 # production
 build
-src/client/dist
+client/dist
+server/bin
 
 # misc
 .DS_Store

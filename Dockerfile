@@ -10,6 +10,6 @@ RUN mkdir server
 RUN mkdir client
 RUN mkdir db
 COPY ./server/bin /server/
-COPY client/dist/ /client/
+COPY client/dist/ /client/dist
 COPY db/migrate/ /db/
 ENTRYPOINT ["./server"]
