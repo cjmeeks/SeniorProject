@@ -6,7 +6,7 @@ task :watch => [:build_backend, :elm_api_code_generator, :serve_webpack_hot_relo
 task :build => [:build_backend, :elm_api_code_generator, :build_frontend]
 
 task :serve_app => [:build, :serve]
-task :build_prod => [:build, :install]
+task :build_prod => [:build, :install, :copy_prod]
 
 multitask :serve_webpack_hot_reload => [:serve, :webpack_hot_reload]
 
@@ -46,11 +46,16 @@ task :installers do
   sh("stack install hpack")
   sh("stack install intero")
   sh("npm install -g typescript")
-  sh("npm install")
+  sh("cd client && npm install")
   sh("gem install pg")
   sh("gem install standalone_migrations")
 end
 
 task :install => :build do
-  sh("cd server && stack install --local-bin-path bin")
+  sh("cd server && stack install --local-bin-path bin/server")
+end
+
+task :copy_prod do
+  mkdir_p "server/bin/client"
+  sh("copy 'client/dist/*' 'server/bin/client'")
 end
