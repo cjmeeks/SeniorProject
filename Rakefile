@@ -6,7 +6,7 @@ task :watch => [:build_backend, :elm_api_code_generator, :serve_webpack_hot_relo
 task :build => [:build_backend, :elm_api_code_generator, :build_frontend]
 
 task :serve_app => [:build, :serve]
-task :build_prod => [:build, :install, :copy_prod]
+task :build_prod => [:build, :install]
 
 multitask :serve_webpack_hot_reload => [:serve, :webpack_hot_reload]
 
@@ -56,6 +56,6 @@ task :install => :build do
 end
 
 task :copy_prod do
-  mkdir_p "server/bin/client"
-  sh("copy 'client/dist/*' 'server/bin/client'")
+  # mkdir_p "server/bin/client/dist"
+  sh("robocopy client/dist server/bin/client/dist /S")
 end
