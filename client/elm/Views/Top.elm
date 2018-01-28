@@ -91,7 +91,7 @@ view model =
                     div [] []
 
                 Login ->
-                    div [ class "main-row" ] [ Login.view model ]
+                    div [ class "login-layout-grid" ] [ Login.view model ]
     in
     if model.currentPage == Login then
         div []

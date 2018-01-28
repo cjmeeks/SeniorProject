@@ -11,30 +11,30 @@ import Shared.Generated exposing (Exercise, Lift, Run, Set, User, Workout)
 
 type Msg
     = NavMsg Nav.State
-    | LocationChange Location
-    | AddExercise
+    | AddExButton
     | AddRun
-    | CardioModalMsg Modal.State --
-    | ExerciseModalMsg Modal.State --
-    | SetModalMsg Modal.State --
+    | AddExercise
     | AddWorkoutModalMsg Modal.State --
+    | AddWorkoutModalButton
+    | AddSaved Workout
+    | CardioModalMsg Modal.State --
+    | CardioMsg Cardio
+    | Cancel
+    | DeleteSavedWorkout Int
+    | ExerciseModalMsg Modal.State --
+    | GetDate
+    | LocationChange Location
+    | NameInput String
+    | OpenCardio
+    | OpenSet Int
+    | OpenAdd
+    | SetModalMsg Modal.State --
     | SignUpMsg Modal.State --
     | SetDrop Drop.State --
-    | OpenCardio
-    | AddExButton
-    | OpenSet Int
-    | CardioMsg Cardio
     | SetMsg SetFormMsg
     | SaveWorkout
-    | ViewWorkoutClick Workout
-    | OpenAdd
-    | AddWorkoutModalButton
-    | NameInput String
-    | Cancel
     | SaveUserWorkout Workout
-    | DeleteSavedWorkout Int
-    | AddSaved Workout
-    | GetDate
+    | ViewWorkoutClick Workout
     | UpdateLogin LoginMsg
     | UpdateSignup SignupMsg
     | UpdateHandle HandleStuff
