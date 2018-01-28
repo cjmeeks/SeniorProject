@@ -27,7 +27,7 @@ import Rest
         , saveWorkout
         , signupCall
         )
-import Types exposing (Cardio(..), Data(..), Model, Msg(..), Page(..), SetFormMsg(..))
+import Types exposing (Cardio(..), Data(..), HandleStuff(..), Model, Msg(..), Page(..), SetFormMsg(..))
 import Update.Update as U
 import Views.Top exposing (view)
 
@@ -58,6 +58,6 @@ subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.batch
         [ Nav.subscriptions model.navbar NavMsg
-        , handleDateChange HandleDateChange
+        , Sub.batch [ Sub.map UpdateHandle <| handleDateChange HandleDateChange ]
         , Drop.subscriptions model.setDrop SetDrop
         ]

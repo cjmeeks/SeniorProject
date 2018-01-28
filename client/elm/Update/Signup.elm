@@ -30,17 +30,17 @@ import Types exposing (Cardio(..), Data(..), Model, Msg(..), Page(..), SetFormMs
 signup : SignupMsg -> Model -> ( Model, Cmd Msg )
 signup msg model =
     case msg of
-        SSignupButton ->
+        SignupButton ->
             ( { model | signupModal = Modal.visibleState }, Cmd.none )
 
-        SSignupSend ->
+        SignupSend ->
             let
                 staged =
                     model.staged
             in
             ( { model | staged = { staged | user = initUser }, signupModal = Modal.hiddenState }, signupCall staged.user )
 
-        SSignupUserName str ->
+        SignupUserName str ->
             let
                 staged =
                     model.staged
@@ -53,7 +53,7 @@ signup msg model =
             in
             ( { model | staged = newStaged }, Cmd.none )
 
-        SSignupPassword str ->
+        SignupPassword str ->
             let
                 staged =
                     model.staged
@@ -66,7 +66,7 @@ signup msg model =
             in
             ( { model | staged = newStaged }, Cmd.none )
 
-        SSignupFirst str ->
+        SignupFirst str ->
             let
                 staged =
                     model.staged
@@ -79,7 +79,7 @@ signup msg model =
             in
             ( { model | staged = newStaged }, Cmd.none )
 
-        SSignupLast str ->
+        SignupLast str ->
             let
                 staged =
                     model.staged
@@ -92,7 +92,7 @@ signup msg model =
             in
             ( { model | staged = newStaged }, Cmd.none )
 
-        SSignupWeight str ->
+        SignupWeight str ->
             let
                 staged =
                     model.staged
@@ -117,7 +117,7 @@ signup msg model =
             in
             ( { model | staged = newStaged }, Cmd.none )
 
-        SSignupHeight str ->
+        SignupHeight str ->
             let
                 staged =
                     model.staged
@@ -142,7 +142,7 @@ signup msg model =
             in
             ( { model | staged = newStaged }, Cmd.none )
 
-        SSignupAge str ->
+        SignupAge str ->
             let
                 staged =
                     model.staged
@@ -166,3 +166,6 @@ signup msg model =
                     { staged | user = { user | user_age = convert } }
             in
             ( { model | staged = newStaged }, Cmd.none )
+
+        SCancel ->
+            ( { model | addModal = Modal.hiddenState, setModal = Modal.hiddenState, cardioModal = Modal.hiddenState, signupModal = Modal.hiddenState }, Cmd.none )

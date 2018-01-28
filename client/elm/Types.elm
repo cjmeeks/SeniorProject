@@ -11,11 +11,7 @@ import Shared.Generated exposing (Exercise, Lift, Run, Set, User, Workout)
 
 type Msg
     = NavMsg Nav.State
-    | HandleUser User --
-    | HandleError Http.Error --
     | LocationChange Location
-    | HandleDateChange String --
-    | HandleLifts (List Lift) --
     | AddExercise
     | AddRun
     | CardioModalMsg Modal.State --
@@ -30,84 +26,58 @@ type Msg
     | CardioMsg Cardio
     | SetMsg SetFormMsg
     | SaveWorkout
-    | HandleSavedUser User --
-    | HandleCurrentId String Int --
     | ViewWorkoutClick Workout
     | OpenAdd
     | AddWorkoutModalButton
     | NameInput String
     | Cancel
-    | HandleSuccess String --
     | SaveUserWorkout Workout
-    | HandleDelete String --
     | DeleteSavedWorkout Int
-    | LoginUserName String --
-    | LoginPassword String --
-    | HandleLogin User --
-    | HandleSignup String --
-    | LoginButton --
-    | SignupButton --
-    | SignupSend --
-    | SignupUserName String --
-    | SignupPassword String --
-    | SignupFirst String --
-    | SignupLast String --
-    | SignupWeight String --
-    | SignupHeight String --
-    | SignupAge String --
-    | Logout --
     | AddSaved Workout
     | GetDate
     | UpdateLogin LoginMsg
     | UpdateSignup SignupMsg
-    | UpdateModals ModalMsgs
     | UpdateHandle HandleStuff
 
 
 type LoginMsg
-    = LLoginUserName String
-    | LLoginPassword String
-    | LLoginButton
-    | LLogout
+    = LoginUserName String
+    | LoginPassword String
+    | LoginButton
+    | Logout
 
 
 type SignupMsg
-    = SSignupButton
-    | SSignupSend
-    | SSignupUserName String
-    | SSignupPassword String
-    | SSignupFirst String
-    | SSignupLast String
-    | SSignupWeight String
-    | SSignupHeight String
-    | SSignupAge String
-
-
-type ModalMsgs
-    = MCardioModalMsg Modal.State
-    | MExerciseModalMsg Modal.State
-    | MSetModalMsg Modal.State
-    | MAddWorkoutModalMsg Modal.State
-    | MSignUpMsg Modal.State
+    = SignupButton
+    | SignupSend
+    | SignupUserName String
+    | SignupPassword String
+    | SignupFirst String
+    | SignupLast String
+    | SignupWeight String
+    | SignupHeight String
+    | SignupAge String
+    | SCancel
 
 
 type HandleStuff
-    = HHandleSignup String
-    | HHandleLogin User
-    | HHandleUser User
-    | HHandleError Http.Error
-    | HHandleDateChange String
-    | HHandleLifts (List Lift)
-    | HHandleSavedUser User
-    | HHandleCurrentId String Int
-    | HHandleSuccess String
-    | HHandleDelete String
+    = HandleSignup String
+    | HandleLogin User
+    | HandleUser User
+    | HandleError Http.Error
+    | HandleDateChange String
+    | HandleLifts (List Lift)
+    | HandleSavedUser User
+    | HandleCurrentId String Int
+    | HandleSuccess String
+    | HandleDelete String
 
 
 type Cardio
     = AddRunButton
     | DistanceInput String
     | TimeInput String
+    | CCancel
 
 
 type SetFormMsg
@@ -115,6 +85,7 @@ type SetFormMsg
     | LiftInput Lift
     | WeightInput String
     | RepInput String
+    | SetCancel
 
 
 type Page

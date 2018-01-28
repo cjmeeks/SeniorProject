@@ -9,19 +9,19 @@ import Shared.Generated
         , Set
         , User
         , Workout
-        , postApiDeleteSave
-        , postApiAddSave
-        , getApiUser
-        , postApiAddWorkout
-        , getApiLifts
         , getApiAddCurWID
         , getApiAddExercise
         , getApiAddRun
         , getApiAddSet
+        , getApiLifts
         , getApiLogin
+        , getApiUser
+        , postApiAddSave
+        , postApiAddWorkout
+        , postApiDeleteSave
         , postApiSignup
         )
-import Types exposing (Msg(..))
+import Types exposing (HandleStuff(..), Msg(..))
 
 
 getUser : Int -> Cmd Msg
@@ -82,80 +82,80 @@ processUser : Result Http.Error User -> Msg
 processUser result =
     case result of
         Ok us ->
-            HandleUser us
+            UpdateHandle <| HandleUser us
 
         Err err ->
-            HandleError err
+            UpdateHandle <| HandleError err
 
 
 processLogin : Result Http.Error User -> Msg
 processLogin result =
     case result of
         Ok us ->
-            HandleLogin us
+            UpdateHandle <| HandleLogin us
 
         Err err ->
-            HandleError err
+            UpdateHandle <| HandleError err
 
 
 processLifts : Result Http.Error (List Lift) -> Msg
 processLifts result =
     case result of
         Ok a ->
-            HandleLifts a
+            UpdateHandle <| HandleLifts a
 
         Err err ->
-            HandleError err
+            UpdateHandle <| HandleError err
 
 
 processSaveWorkout : Result Http.Error User -> Msg
 processSaveWorkout result =
     case result of
         Ok us ->
-            HandleSavedUser us
+            UpdateHandle <| HandleSavedUser us
 
         Err err ->
-            HandleError err
+            UpdateHandle <| HandleError err
 
 
 processUserSaveWorkout : Result Http.Error String -> Msg
 processUserSaveWorkout result =
     case result of
         Ok us ->
-            HandleSuccess us
+            UpdateHandle <| HandleSuccess us
 
         Err err ->
-            HandleError err
+            UpdateHandle <| HandleError err
 
 
 processGetCurrentId : String -> Result Http.Error Int -> Msg
 processGetCurrentId y result =
     case result of
         Ok id ->
-            HandleCurrentId y id
+            UpdateHandle <| HandleCurrentId y id
 
         Err err ->
-            HandleError err
+            UpdateHandle <| HandleError err
 
 
 processDelete : Result Http.Error String -> Msg
 processDelete result =
     case result of
         Ok us ->
-            HandleSuccess us
+            UpdateHandle <| HandleSuccess us
 
         Err err ->
-            HandleError err
+            UpdateHandle <| HandleError err
 
 
 processSignup : Result Http.Error String -> Msg
 processSignup result =
     case result of
         Ok us ->
-            HandleSignup us
+            UpdateHandle <| HandleSignup us
 
         Err err ->
-            HandleError err
+            UpdateHandle <| HandleError err
 
 
 

@@ -35,7 +35,7 @@ import Types exposing (Cardio(..), Data(..), LoginMsg(..), Model, Msg(..), Page(
 login : LoginMsg -> Model -> ( Model, Cmd Msg )
 login msg model =
     case msg of
-        LLoginUserName str ->
+        LoginUserName str ->
             let
                 staged =
                     model.staged
@@ -48,7 +48,7 @@ login msg model =
             in
             ( { model | staged = newStaged }, Cmd.none )
 
-        LLoginPassword str ->
+        LoginPassword str ->
             let
                 staged =
                     model.staged
@@ -61,12 +61,12 @@ login msg model =
             in
             ( { model | staged = newStaged }, Cmd.none )
 
-        LLoginButton ->
+        LoginButton ->
             let
                 staged =
                     model.staged
             in
             ( { model | staged = { staged | login = initLogin } }, loginCall model.staged.login.username model.staged.login.password )
 
-        LLogout ->
+        Logout ->
             ( { model | user = initUser, currentPage = Login }, Navigation.newUrl "#login" )
