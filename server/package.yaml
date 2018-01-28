@@ -1,11 +1,11 @@
-name: servant-elm-template
-version: '0.0.0.1'
+name: WorkoutStatTracker
+version: '0.5'
 category: Web
-author: Tyler Lentz
-maintainer: Tyler Lentz
-copyright: Tyler Lentz
+author: CJ Meeks
+maintainer: CJ Meeks
+copyright: CJ Meeks
 license: AllRightsReserved
-github: tlentz/servent-elm-template
+github: cjmeeks/SeniorProject
 
 dependencies:
 - aeson
@@ -57,7 +57,7 @@ executables:
     - -with-rtsopts=-N
     dependencies:
     - cryptonite
-    - servant-elm-template
+    - WorkoutStatTracker
     - wai-cors
     - warp
 
@@ -69,7 +69,7 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - servant-elm-template
+    - WorkoutStatTracker
     - servant-elm
     - servant-foreign
 
@@ -83,4 +83,4 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - hspec
-    - servant-elm-template
+    - WorkoutStatTracker

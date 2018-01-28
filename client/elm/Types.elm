@@ -1,52 +1,54 @@
 module Types exposing (..)
 
+import Bootstrap.Dropdown as Drop
+import Bootstrap.Modal as Modal
 import Bootstrap.Navbar as Nav
 import Dict
 import Http
 import Navigation exposing (Location)
-import Shared.Generated exposing (User, Workout, Run, Exercise, Set, Lift)
-import Bootstrap.Modal as Modal
-import Bootstrap.Dropdown as Drop
+import Shared.Generated exposing (Exercise, Lift, Run, Set, User, Workout)
 
 
 type Msg
     = NavMsg Nav.State
-    | HandleUser User
-    | HandleError Http.Error
-    | LocationChange Location
-    | HandleDateChange String
-    | HandleLifts (List Lift)
-    | AddExercise
-    | AddRun
-    | CardioModalMsg Modal.State
-    | ExerciseModalMsg Modal.State
-    | SetModalMsg Modal.State
-    | AddWorkoutModalMsg Modal.State
-    | SignUpMsg Modal.State
-    | SetDrop Drop.State
-    | OpenCardio
     | AddExButton
-    | OpenSet Int
+    | AddRun
+    | AddExercise
+    | AddWorkoutModalMsg Modal.State --
+    | AddWorkoutModalButton
+    | AddSaved Workout
+    | CardioModalMsg Modal.State --
     | CardioMsg Cardio
+    | Cancel
+    | DeleteSavedWorkout Int
+    | ExerciseModalMsg Modal.State --
+    | GetDate
+    | LocationChange Location
+    | NameInput String
+    | OpenCardio
+    | OpenSet Int
+    | OpenAdd
+    | SetModalMsg Modal.State --
+    | SignUpMsg Modal.State --
+    | SetDrop Drop.State --
     | SetMsg SetFormMsg
     | SaveWorkout
-    | HandleSavedUser User
-    | HandleCurrentId String Int
-    | ViewWorkoutClick Workout
-    | OpenAdd
-    | AddWorkoutModalButton
-    | NameInput String
-    | Cancel
-    | HandleSuccess String
     | SaveUserWorkout Workout
-    | HandleDelete String
-    | DeleteSavedWorkout Int
-    | LoginUserName String
+    | ViewWorkoutClick Workout
+    | UpdateLogin LoginMsg
+    | UpdateSignup SignupMsg
+    | UpdateHandle HandleStuff
+
+
+type LoginMsg
+    = LoginUserName String
     | LoginPassword String
-    | HandleLogin User
-    | HandleSignup String
     | LoginButton
-    | SignupButton
+    | Logout
+
+
+type SignupMsg
+    = SignupButton
     | SignupSend
     | SignupUserName String
     | SignupPassword String
@@ -55,15 +57,27 @@ type Msg
     | SignupWeight String
     | SignupHeight String
     | SignupAge String
-    | Logout
-    | AddSaved Workout
-    | GetDate
+    | SCancel
+
+
+type HandleStuff
+    = HandleSignup String
+    | HandleLogin User
+    | HandleUser User
+    | HandleError Http.Error
+    | HandleDateChange String
+    | HandleLifts (List Lift)
+    | HandleSavedUser User
+    | HandleCurrentId String Int
+    | HandleSuccess String
+    | HandleDelete String
 
 
 type Cardio
     = AddRunButton
     | DistanceInput String
     | TimeInput String
+    | CCancel
 
 
 type SetFormMsg
@@ -71,6 +85,7 @@ type SetFormMsg
     | LiftInput Lift
     | WeightInput String
     | RepInput String
+    | SetCancel
 
 
 type Page

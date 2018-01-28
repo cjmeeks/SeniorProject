@@ -8,7 +8,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Shared.Generated exposing (User, Workout)
 import Shared.Helper as Helper exposing (datePicker)
-import Types exposing (Model, Msg(..))
+import Types exposing (LoginMsg(..), Model, Msg(..))
 import Views.Dashboard exposing (graphView)
 
 
@@ -40,7 +40,7 @@ userView user =
             [ div [ class "profile-header" ]
                 [ text (user.user_first_name ++ " " ++ user.user_last_name ++ " (" ++ user.user_username ++ ")")
                 , div [ class "edit-profile" ]
-                    [ Button.button [ Button.danger, Button.onClick Logout ] [ text "Logout" ] ]
+                    [ Button.button [ Button.danger, Button.onClick (UpdateLogin Logout) ] [ text "Logout" ] ]
                 ]
             ]
         |> Card.block [ Card.blockAttrs [ class "row profile-row" ] ]

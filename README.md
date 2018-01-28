@@ -52,6 +52,9 @@
     * this will build your app for production by generating your dist folder
 * then run `rake serve` to serve your production app
 
+* on deployment server install docker
+    * run 
+
 ## Included Already
 * JQuery
 * Bootstrap
