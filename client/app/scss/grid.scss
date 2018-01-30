@@ -3,7 +3,9 @@ $purple: #a239ca;
 $neon-purple: #4717f6;
 $stark: #e7dfdd;
 $gray: rgb(230, 230, 230);
+$navbar-height: 40px;
 
+/*LOGIN*/
 .login-layout-grid{
   display: grid;
   height: 100%;
@@ -32,3 +34,29 @@ $gray: rgb(230, 230, 230);
 .login-row {
   padding: 10px;
 }
+.login-input{
+  font-size: 20px;
+}
+.login-btn{
+  font-size: 28px;
+  width: 100%;
+}
+
+.main-layout {
+  display: grid;
+  grid-template-rows: $navbar-height 1fr 1fr;
+  background: $stark;
+}
+
+.dash-graph-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 10px;
+  grid-column-gap: 10px;
+}
+.graph-layout {
+  display: grid;
+  grid-template-rows: 40px 1fr;
+}
+
+// .dash-fav-layout

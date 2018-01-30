@@ -1,44 +1,9 @@
 module Views.Top exposing (..)
 
-import Bootstrap.Button as Button
-import Bootstrap.Dropdown as Drop
-import Bootstrap.Modal as Modal
-import Bootstrap.Navbar as Nav
-import Dict
-import FontAwesome.Web as Icon
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (..)
-import Init
-    exposing
-        ( currentIdCmds
-        , initExercise
-        , initLift
-        , initLogin
-        , initRun
-        , initSet
-        , initUser
-        , initWorkout
-        , initialModel
-        )
-import Navigation exposing (Location)
-import Ports.Ports exposing (DatePickerMsg, buildDatePicker, getCurrentDate, handleDateChange)
-import Rest
-    exposing
-        ( addWorkout
-        , deleteSavedWorkout
-        , getCurrentId
-        , getLiftsCall
-        , getUser
-        , loginCall
-        , saveWorkout
-        , signupCall
-        )
-import Routing exposing (parseLocation)
-import Shared.Generated exposing (encodeExercise, encodeLift, encodeRun, encodeSet, encodeUser, encodeWorkout)
-import Shared.Helper exposing (getGraphDataRunDistance, getGraphDataRunMile, getGraphDataRunSpeed, getRunStats, getTotalTimeWorkout)
+import Styles.Styles exposing (..)
 import Types exposing (Cardio(..), Data(..), Model, Msg(..), Page(..), SetFormMsg(..))
-import Update.Update as U
 import Views.AddWorkout as Add exposing (addModal)
 import Views.Dashboard as Dash
 import Views.Login as Login
@@ -55,35 +20,35 @@ view model =
         curView =
             case model.currentPage of
                 Dashboard ->
-                    div [ class "main-row" ]
+                    div []
                         [ Dash.view model
                         , addModal model
                         ]
 
                 AddWorkout ->
-                    div [ class "main-row" ]
+                    div []
                         [ Add.view model
                         , addModal model
                         ]
 
                 Workouts ->
-                    div [ class "main-row" ]
+                    div []
                         [ Workout.view model
                         , addModal model
                         ]
 
                 Stats ->
-                    div [ class "main-row" ]
+                    div []
                         [ Stats.view model
                         ]
 
                 Profile ->
-                    div [ class "main-row" ]
+                    div []
                         [ User.view model
                         ]
 
                 ViewWorkout ->
-                    div [ class "main-row" ]
+                    div []
                         [ Workout.detailedWorkoutView model.selectedWorkout
                         ]
 
@@ -99,7 +64,7 @@ view model =
             , Signup.signupModal model
             ]
     else
-        div []
-            [ NavView.newView model
-            , curView
+        div [ class "main-layout" ]
+            [ div [ gridAccess 1 1 ] [ NavView.newView model ]
+            , div [ gridAccess 2 1 ] [ curView ]
             ]

@@ -3,7 +3,7 @@
 // npm start -> Development
 const PRODUCTION = process.env.npm_lifecycle_event === 'build';
 const DEVELOPMENT = !PRODUCTION;
-const ELM_DEBUG = DEVELOPMENT ? 'true' : 'false'
+const ELM_DEBUG = DEVELOPMENT ? 'true' : 'true'
 const Path = require('path');
 const Webpack = require('webpack');
 const WepackMd5Hash = require('webpack-md5-hash');

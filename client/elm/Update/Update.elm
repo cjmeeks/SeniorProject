@@ -165,10 +165,10 @@ update msg model =
 
 fakeAuth : Msg -> Model -> ( Model, Cmd Msg )
 fakeAuth msg model =
-    if String.isEmpty model.user.user_username && String.isEmpty model.user.user_password && (model.currentPage /= Login) then
-        ( { model | currentPage = Login }, Cmd.batch [ Navigation.newUrl "#login" ] )
-    else
-        updateGraphs msg model
+    -- if String.isEmpty model.user.user_username && String.isEmpty model.user.user_password && (model.currentPage /= Login) then
+    --     ( { model | currentPage = Login }, Cmd.batch [ Navigation.newUrl "#login" ] )
+    -- else
+    updateGraphs msg model
 
 
 updateGraphs : Msg -> Model -> ( Model, Cmd Msg )

@@ -1,16 +1,16 @@
 module Init exposing (..)
 
+import Bootstrap.Dropdown as Drop
+import Bootstrap.Modal as Modal
 import Bootstrap.Navbar as Nav
 import Dict
 import Http
 import Navigation exposing (Location)
 import Ports.Ports exposing (DatePickerMsg, buildDatePicker, getCurrentDate)
-import Routing exposing (parseLocation)
-import Shared.Generated exposing (User, Workout, Exercise, Run, Set, Lift)
-import Types exposing (Model, Msg(..), Staged, Data(..), Graphs, LoginModel)
-import Bootstrap.Modal as Modal
-import Bootstrap.Dropdown as Drop
 import Rest exposing (getCurrentId)
+import Routing exposing (parseLocation)
+import Shared.Generated exposing (Exercise, Lift, Run, Set, User, Workout)
+import Types exposing (Data(..), Graphs, LoginModel, Model, Msg(..), Staged)
 
 
 initUser : User
@@ -58,7 +58,7 @@ initExercise =
 
 initRun : Run
 initRun =
-    { run_id = -1
+    { run_id = 1
     , run_distance = -1
     , run_time = -1
     , run_mile_avg = -1
@@ -116,19 +116,19 @@ initialModel loc =
         ( navbar, navCmd ) =
             Nav.initialState NavMsg
     in
-        { navbar = navbar
-        , user = initUser
-        , currentPage = parseLocation loc
-        , queryDate = ""
-        , dateNames = Dict.fromList <| [ ( "workoutDateRange", "wk-date-range" ) ]
-        , staged = initStaged
-        , cardioModal = Modal.hiddenState
-        , exerciseModal = Modal.hiddenState
-        , signupModal = Modal.hiddenState
-        , setModal = Modal.hiddenState
-        , addModal = Modal.hiddenState
-        , setDrop = Drop.initialState
-        , lifts = []
-        , selectedWorkout = initWorkout initUser
-        , allGraphs = initGraphs
-        }
+    { navbar = navbar
+    , user = initUser
+    , currentPage = parseLocation loc
+    , queryDate = ""
+    , dateNames = Dict.fromList <| [ ( "workoutDateRange", "wk-date-range" ) ]
+    , staged = initStaged
+    , cardioModal = Modal.hiddenState
+    , exerciseModal = Modal.hiddenState
+    , signupModal = Modal.hiddenState
+    , setModal = Modal.hiddenState
+    , addModal = Modal.hiddenState
+    , setDrop = Drop.initialState
+    , lifts = []
+    , selectedWorkout = initWorkout initUser
+    , allGraphs = initGraphs
+    }
